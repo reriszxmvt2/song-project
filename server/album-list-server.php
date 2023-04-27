@@ -8,25 +8,32 @@
     $userUpdateAlbum = $_POST['update_album'];
     $goToSongPage = $_POST['song_list'];
     
-    function fetchAlbumList($nameAlbum)
-    {
-        include('./connect-db.php');
-        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbum' ";
-        $query = mysqli_query($connect, $sql);
-        $album = mysqli_fetch_assoc($query);
+    // function fetchAlbumList($nameAlbum)
+    // {
+    //     include('./connect-db.php');
+    //     $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbum' AND ";
+    //     $query = mysqli_query($connect, $sql);
+    //     $album = mysqli_fetch_assoc($query);
 
-        return $album;
-    };
+    //     return $album;
+    // };
 
     if (isset($userAddAlbum)) :
         $nameAlbumAdd = $_POST['nameAlbum'];
         $idBand = $_POST['addAlbum'];
-        $album = fetchAlbumList($nameAlbumAdd);
+        // $album = fetchAlbumList($nameAlbumAdd);
+
+        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumAdd' AND id_band = '$idBand' ";
+        $query = mysqli_query($connect, $sql);
+        $album = mysqli_fetch_assoc($query);
+
+        // print_r($album);
+        // print_r($nameAlbumAdd);
 
         if ($album) {
             $nameAlbumInDb = $album['name_album'];
             $idBandInDb = $album['id_band'];
-            if ($nameAlbumAdd == $nameAlbumInDb && $idBand == $idBandInDb) {
+            if ($nameAlbumAdd == $nameAlbumInDb) {
                 array_push($errors, 1);
             }
         }
@@ -67,14 +74,18 @@
         $nameAlbumUpdated = $_POST['nameAlbum'];
         $idAlbum = $_POST['idAlbum'];
         $idBand = $_POST['idBand'];
-        $album = fetchAlbumList($nameAlbumUpdated);
+        // $album = fetchAlbumList($nameAlbumUpdated);
+
+        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumUpdated' AND id_band = '$idBand' ";
+        $query = mysqli_query($connect, $sql);
+        $album = mysqli_fetch_assoc($query);
     
         if ($album) {
             $nameAlbumInDb = $album['name_album'];
             $idAlbumInDb = $album['id'];
             $idBandInDbAlbum = $album['id_band'];
     
-            if ($nameAlbumUpdated == $nameAlbumInDb && $idAlbum != $idAlbumInDb && $idBand == $idBandInDbAlbum) {
+            if ($nameAlbumUpdated == $nameAlbumInDb && $idAlbum != $idAlbumInDb) {
                 array_push($errors, 1);
             }
         }
