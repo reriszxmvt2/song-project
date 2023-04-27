@@ -1,4 +1,4 @@
-<?php
+<?php //todo: PDO
     $servername = 'localhost';
     $username = 'root';
     $password = 'root';
@@ -9,4 +9,3 @@
     if (!$connect) {
         die("Connection failed: " . mysqli_connect_error());
     }
-?>

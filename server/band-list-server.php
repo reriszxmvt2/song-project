@@ -11,7 +11,7 @@
     function fetchBand($nameBand,$idRecord)
     {
         include('./connect-db.php');
-        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBand' AND id_record= '$idRecord'";
+        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBand' AND id_record = '$idRecord'";
         $query = mysqli_query($connect, $sql);
         $band = mysqli_fetch_assoc($query);
 
@@ -23,7 +23,11 @@
         $nameBandAdd = $_POST['nameBand'];
         $idRecord = $_POST['addBand'];
         $idBand = $_POST['idBand'];
-        $band = fetchBand($nameBandAdd,$idRecord);
+        // $band = fetchBand($nameBandAdd,$idRecord);
+
+        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBandAdd' AND id_record = '$idRecord'";
+        $query = mysqli_query($connect, $sql);
+        $band = mysqli_fetch_assoc($query);
 
         if ($band) {
             $nameBandInDb = $band['name_band'];
@@ -78,9 +82,8 @@
         $nameBand = $_POST['nameBand'];
         $idBand = $_POST['idBand'];
         $idRecord = $_POST['idRecord'];
-        // $band = fetchBand($nameBand,$idRecord);
-
-        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBand' AND id_record= '$idRecord'";
+        
+        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBand' AND id_record = '$idRecord' AND id != '$idBand' ";
         $query = mysqli_query($connect, $sql);
         $band = mysqli_fetch_assoc($query);
 
@@ -91,22 +94,23 @@
             $idBandInDb = $band['id'];
             $idRecordInDbBand = $band['id_record'];
 
-            if ($nameBand == $nameBandInDb) {
+            echo $nameBand == $nameBandInDb;
+            echo $idRecord == $idRecordInDbBand;
+            if ($nameBand == $nameBandInDb && $idRecord == $idRecordInDbBand) {
                 array_push($errors, 1);
             }
         }
 
         $errorsLength = count($errors);
+        echo $errorsLength;
 
         if ($errorsLength != 0) {
-            echo 'poooooooo';
             $_SESSION['error'] = 'Name Band Already Exists.';
             $_SESSION['nameBand'] = $nameBand;
             header('location: ../client/update-band-list-client.php');
         }
 
         if ($errorsLength == 0) {
-            echo 'phetttttt';
             $sql = "UPDATE band_list SET name_band = '$nameBand' WHERE id = '$idBand'";
             $query = mysqli_query($connect, $sql);
             header('location: ../client/band-list-client.php');

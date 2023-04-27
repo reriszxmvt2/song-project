@@ -35,7 +35,6 @@
                 echo "<table>";
                 echo "<tr>";
                 echo "<th>album_name</th>";
-                // echo "<th>song_number</th>";
                 echo "<th>delete_album</th>";
                 echo "<th>update_album</th>";
                 echo "<tr>";
@@ -43,12 +42,6 @@
                 while ($row = mysqli_fetch_assoc($query)) {
                     echo "<tr>";
                     echo "<td style='text-align: center;'>" . $row['name_album'] . "</td>";
-
-                    // $sql = "SELECT * FROM `song_list` WHERE id_album = {$row['id']}";
-                    // $query2 = mysqli_query($connect, $sql);
-                    // $resultSong = mysqli_fetch_all($query2);
-
-                    // echo "<td style='text-align: center;'>" . count($resultSong) . "</td>";
                     echo "<td><button type='submit' name='delete_album' value=" . serialize($row) . " style='background: crimson'> delete album </button></td>";
                     echo "<td><button type='submit' name='update_album_data' value=" . serialize($row) . " style='background: yellow;'> update album </button></td>";
                     echo "</tr>";

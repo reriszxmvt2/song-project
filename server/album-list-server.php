@@ -11,7 +11,7 @@
     // function fetchAlbumList($nameAlbum)
     // {
     //     include('./connect-db.php');
-    //     $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbum' AND ";
+    //     $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbum' AND id_band = '$idBand' ";
     //     $query = mysqli_query($connect, $sql);
     //     $album = mysqli_fetch_assoc($query);
 
@@ -22,13 +22,9 @@
         $nameAlbumAdd = $_POST['nameAlbum'];
         $idBand = $_POST['addAlbum'];
         // $album = fetchAlbumList($nameAlbumAdd);
-
-        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumAdd' AND id_band = '$idBand' ";
+        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumAdd' AND id_band = '$idBand'";
         $query = mysqli_query($connect, $sql);
         $album = mysqli_fetch_assoc($query);
-
-        // print_r($album);
-        // print_r($nameAlbumAdd);
 
         if ($album) {
             $nameAlbumInDb = $album['name_album'];
@@ -75,8 +71,7 @@
         $idAlbum = $_POST['idAlbum'];
         $idBand = $_POST['idBand'];
         // $album = fetchAlbumList($nameAlbumUpdated);
-
-        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumUpdated' AND id_band = '$idBand' ";
+        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumUpdated' AND id_band = '$idBand' AND id != '$idAlbum'";
         $query = mysqli_query($connect, $sql);
         $album = mysqli_fetch_assoc($query);
     
