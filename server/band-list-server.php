@@ -36,7 +36,6 @@
         }
 
         $errorsListLength = count($errors);
-        echo $errorsListLength;
 
         if ($errorsListLength != 0) {
 
@@ -55,7 +54,6 @@
 
     if (isset($userDeleteBand)):
         $band = unserialize($userDeleteBand);
-        print_r($band);
         $nameBand = $band['name_band'];
         $idBand = $band['id'];
         // $sql = "DELETE FROM `band_list` WHERE id = '$nameBand'";
@@ -70,7 +68,6 @@
 
     if (isset($sendDataToUpdate)):
         $band = unserialize($sendDataToUpdate);
-        print_r($band);
         $_SESSION['idBand'] = $band['id'];
         $_SESSION['nameBand'] = $band['name_band'];
         $_SESSION['idRecord'] = $band['id_record'];
@@ -78,7 +75,6 @@
     endif;
 
     if (isset($userUpdateBand)):
-        print_r($_REQUEST);
         $nameBand = $_POST['nameBand'];
         $idBand = $_POST['idBand'];
         $idRecord = $_POST['idRecord'];
@@ -95,7 +91,6 @@
         }
 
         $errorsLength = count($errors);
-        echo ($errorsLength);
 
         if ($errorsLength != 0) {
             $_SESSION['error'] = 'Name Band Already Exists.';
@@ -111,9 +106,7 @@
     endif;
 
     if (isset($toAlbumPage)):
-        print_r($_REQUEST);
         $band = unserialize($_POST['toAlbumPage']);
-        print_r($band);
         $_SESSION['id'] = $band['id'];
         $_SESSION['id_record'] = $band['id_record'];
         $_SESSION['name_band'] = $band['name_band'];

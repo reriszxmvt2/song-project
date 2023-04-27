@@ -19,7 +19,6 @@
     };
 
     if (isset($userAddAlbum)) :
-        print_r($_REQUEST);
         $nameAlbumAdd = $_POST['nameAlbum'];
         $idBand = $_POST['addAlbum'];
         $album = fetchAlbumList($nameAlbumAdd);
@@ -33,7 +32,6 @@
         }
 
         $errorsLength = count($errors);
-        echo $errorsLength;
 
         if ($errorsLength != 0) {
             $_SESSION['error'] = 'Name Album Already Exists.';
@@ -82,7 +80,6 @@
         }
     
         $errorsLength = count($errors);
-        echo ($errorsLength);
     
         if ($errorsLength != 0) {
             $_SESSION['error'] = 'Name Album Already Exists.';

@@ -2,7 +2,6 @@
     session_start();
     include('./connect-db.php');
     $errors = [];
-    print_r($_REQUEST);
     $userDeleteRecord = $_POST['deleteRecord'];
     $userAddRecord = $_POST['addRecord'];
     $sendDataToUpdateRecord = $_POST['updateRecord'];
@@ -49,7 +48,6 @@
 
     if (isset($userDeleteRecord)):
         $rowList = unserialize($userDeleteRecord);
-        print_r($rowList);
         $nameRecord = $rowList['name_record'];
         $idRecord = $rowList['id'];
         // $sql = "DELETE FROM `record_list` WHERE name_record = '$nameRecord'";
@@ -80,7 +78,6 @@
     endif;
 
     if (isset($userUpdateRecord)):
-        print_r($_REQUEST);
         $nameRecordUpdated = $_POST['name_record'];
         $idRecord = $_POST['update_record'];
         $record = fetchRecordList($nameRecordUpdated);

@@ -3,8 +3,6 @@
     if (!isset($_SESSION['username'])) {
         header('location: ./sign-in-client.php');
     }
-
-    print_r($_SESSION);
     
     $nameRecord = $_SESSION['nameRecord'];
     $idRecord = $_SESSION['idRecord'];

@@ -4,8 +4,6 @@
     if (!isset($_SESSION['username'])) {
         header('location: ./sign-in-client.php');
     }
-
-    print_r($_SESSION)
 ?>
 
 <!DOCTYPE html>
