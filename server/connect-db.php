@@ -1,11 +1,11 @@
-<?php //todo: PDO
-    $servername = 'localhost';
-    $username = 'root';
-    $password = 'root';
-    $dbName = 'song_project';
+<?php //todo: PDO /complete/
+    include('config-db.php');
 
-    $connect = mysqli_connect($servername, $username, $password, $dbName);
+    $conn = 'mysql:host='. $servername .'; dbname='. $dbName .'';
 
-    if (!$connect) {
-        die("Connection failed: " . mysqli_connect_error());
+    try {
+        $connect = new PDO($conn, $username, $password);
+        echo "Connected to Database";
+    } catch (PDOException $e) {
+        echo $e->getMessage();
     }

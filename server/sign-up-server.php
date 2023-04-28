@@ -1,27 +1,28 @@
 <?php 
-    session_start();
     include('./connect-db.php');
+    include('../model/sign-up-model.php');
+
+    session_start();
     $error = [];
     $userSignup = $_POST['signup'];
 
     if (isset($userSignup)) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $checkUser = "SELECT * FROM user WHERE username = '$username'";
-        $query = mysqli_query($connect, $checkUser);
-        $userData = mysqli_fetch_assoc($query);
-        $usernameInDb = $userData['username'];
+        $userCreateUsername = $_POST['username'];
+        $userCreatePassword = $_POST['password'];
+        
+        $result = getByUsername($userCreateUsername);
+        $usernameInDb = $result['username'];
 
-        if ($username === $usernameInDb) {
+        if ($userCreateUsername === $usernameInDb) {
             array_push($error, "Username already exists.");
         }
 
         $errorsListLength = count($error);
+        echo ' '.$errorsListLength.' ';
 
         if ($errorsListLength == 0) {
-            $sql = "INSERT INTO user SET username = '$username', password = '$password'";
-            mysqli_query($connect, $sql);
-            $_SESSION['username'] = $username;
+            $result = createUsername($userCreateUsername,$userCreatePassword);
+            $_SESSION['username'] = $userCreateUsername;
             $_SESSION['signUpSuccess'] = 'sign up successfully';
             header('location: ../client/index.php');
         } else {
