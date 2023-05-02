@@ -1,5 +1,6 @@
 <?php
-    include('./connect-db.php');
+    include './connect-db.php';
+    include '../model/band-list-model.php';
     session_start();
     $errors = [];
     $userAddBand = $_POST['addBand'];
@@ -8,26 +9,20 @@
     $userUpdateBand = $_POST['update_band'];
     $toAlbumPage = $_POST['toAlbumPage'];
 
-    function fetchBand($nameBand,$idRecord)
-    {
-        include('./connect-db.php');
-        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBand' AND id_record = '$idRecord'";
-        $query = mysqli_query($connect, $sql);
-        $band = mysqli_fetch_assoc($query);
-
-        return $band;
-    };
-
     if (isset($userAddBand)):
         // print_r($_REQUEST);
         $nameBandAdd = $_POST['nameBand'];
         $idRecord = $_POST['addBand'];
         $idBand = $_POST['idBand'];
-        // $band = fetchBand($nameBandAdd,$idRecord);
 
-        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBandAdd' AND id_record = '$idRecord'";
-        $query = mysqli_query($connect, $sql);
-        $band = mysqli_fetch_assoc($query);
+        $sql = 'SELECT * FROM band_list WHERE name_band = :nameBandAdd AND id_record = :idRecord';
+        $preparedSql = $connect->prepare($sql);
+        $preparedSql->execute([
+            ':nameBandAdd' => $nameBandAdd,
+            ':idRecord' => $idRecord,
+        ]);
+        $band = $preparedSql->fetch();
+        $band = fetchBandList($nameBandAdd, $idRecord, $idBand, $connect);
 
         if ($band) {
             $nameBandInDb = $band['name_band'];
@@ -42,31 +37,23 @@
         $errorsListLength = count($errors);
 
         if ($errorsListLength != 0) {
-
+            // echo 'failed';
             $_SESSION['error'] = 'Name Band Already Exists.';
             $_SESSION['nameBandAdd'] = $nameBandAdd;
             header('location: ../client/add-band-list-client.php');
         }
 
         if ($errorsListLength == 0) {
-
-            $sql = "INSERT INTO `band_list`(`name_band`, `id_record`) VALUES ('$nameBandAdd', '$idRecord')";
-            $query = mysqli_query($connect, $sql);
+            // echo 'pass';
+            addBand($nameBandAdd, $idRecord, $connect);
             header('location: ../client/band-list-client.php');
         }
     endif;
 
     if (isset($userDeleteBand)):
         $band = unserialize($userDeleteBand);
-        $nameBand = $band['name_band'];
         $idBand = $band['id'];
-        // $sql = "DELETE FROM `band_list` WHERE id = '$nameBand'";
-        $sql = "DELETE band_list.*, album_list.* 
-        FROM band_list 
-        LEFT JOIN album_list 
-        ON `band_list`.id = `album_list`.id_band 
-        WHERE `band_list`.id = $idBand ";
-        $query = mysqli_query($connect, $sql);
+        deleteBand($idBand, $connect);
         header('location: ../client/band-list-client.php');
     endif;
 
@@ -83,11 +70,16 @@
         $idBand = $_POST['idBand'];
         $idRecord = $_POST['idRecord'];
         
-        $sql = "SELECT * FROM `band_list` WHERE name_band = '$nameBand' AND id_record = '$idRecord' AND id != '$idBand' ";
-        $query = mysqli_query($connect, $sql);
-        $band = mysqli_fetch_assoc($query);
+        $sql = 'SELECT * FROM band_list WHERE name_band = :nameBand AND id_record = :idRecord AND id != :idBand ';
+        $preparedSql = $connect->prepare($sql);
+        $preparedSql->execute([
+            ':nameBand' => $nameBand,
+            ':idRecord' => $idRecord,
+            ':idBand' => $idBand,
+        ]);
+        $band = $preparedSql->fetch();
 
-        print_r($band);
+        // print_r($band);
 
         if ($band) {
             $nameBandInDb = $band['name_band'];
@@ -111,8 +103,7 @@
         }
 
         if ($errorsLength == 0) {
-            $sql = "UPDATE band_list SET name_band = '$nameBand' WHERE id = '$idBand'";
-            $query = mysqli_query($connect, $sql);
+            updateBand($nameBand, $idBand, $connect);
             header('location: ../client/band-list-client.php');
         }
     endif;

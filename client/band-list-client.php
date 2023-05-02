@@ -1,4 +1,5 @@
 <?php
+    include('../server/connect-db.php');
     session_start();
     if (!isset($_SESSION['username'])) {
         header('location: ./sign-in-client.php');
@@ -23,41 +24,41 @@
 
     <form action="../server/band-list-server.php" method="post">
         <?php
-        include('../server/connect-db.php');
-        $sql = "SELECT * FROM `band_list` WHERE id_record ={$_SESSION['idRecord']}";
-        $query = mysqli_query($connect, $sql);
-        $rowHead = mysqli_num_rows($query);
+            $sql = "SELECT * FROM `band_list` WHERE id_record = {$_SESSION['idRecord']}";
+            $query = $connect->query($sql);
+            $rowHead = $query->fetchAll();
+            $rowHeadLength = count($rowHead);
 
-        if ($query) {
-            if ($rowHead > 0) {
-                echo "<table>";
-                echo "<tr>";
-                echo "<th>band_name</th>";
-                echo "<th>album_number</th>";
-                echo "<th>delete_band</th>";
-                echo "<th>update_band</th>";
-                echo "<th>album_list</th>";
-                echo "<tr>";
-
-                while ($row = mysqli_fetch_assoc($query)) {
+            if ($query) {
+                if ($rowHeadLength > 0) {
+                    echo "<table>";
                     echo "<tr>";
-                    echo "<td style='text-align: center;'>" . $row['name_band'] . "</td>";
+                    echo "<th>band_name</th>";
+                    echo "<th>album_number</th>";
+                    echo "<th>delete_band</th>";
+                    echo "<th>update_band</th>";
+                    echo "<th>album_list</th>";
+                    echo "<tr>";
 
-                    $sql = "SELECT * FROM `album_list` WHERE id_band = {$row['id']}";
-                    $query2 = mysqli_query($connect, $sql);
-                    $resultAlibum = mysqli_fetch_all($query2);
+                    foreach ($rowHead as $row) {
+                        echo "<tr>";
+                        echo "<td style='text-align: center;'>" . $row['name_band'] . "</td>";
 
-                    echo "<td style='text-align: center;'>" . count($resultAlibum) . "</td>";
-                    echo "<td><button type='submit' name='delete_band' value=" . serialize($row) . " style='background: red;' > delete band </button></td>";
-                    echo "<td><button type='submit' name='update_band_data' value=" . serialize($row) . " style='background: yellow;' > update band </button></td>";
-                    echo "<td><button type='submit' name='toAlbumPage' value=" . serialize($row) . " style='background: skyblue;' > album list </button></td>";
-                    echo "</tr>";
+                        $sqlAlbumLength = "SELECT * FROM album_list WHERE id_band = {$row['id']}";
+                        $query = $connect->query($sqlAlbumLength);
+                        $resultAlbum = $query->fetchAll();
+
+                        echo "<td style='text-align: center;'>" . count($resultAlbum) . "</td>";
+                        echo "<td><button type='submit' name='delete_band' value=" . serialize($row) . " style='background: red;' > delete band </button></td>";
+                        echo "<td><button type='submit' name='update_band_data' value=" . serialize($row) . " style='background: yellow;' > update band </button></td>";
+                        echo "<td><button type='submit' name='toAlbumPage' value=" . serialize($row) . " style='background: skyblue;' > album list </button></td>";
+                        echo "</tr>";
+                    }
+
+                    echo "</table>";
+                    mysqli_free_result($result);
                 }
-
-                echo "</table>";
-                mysqli_free_result($result);
             }
-        }
         ?>
     </form>
     <br>

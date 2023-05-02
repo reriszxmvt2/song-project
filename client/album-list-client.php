@@ -1,4 +1,5 @@
 <?php
+    include '../server/connect-db.php';
     session_start();
     if (!isset($_SESSION['username'])) {
         header('location: ./sign-in-client.php');
@@ -26,31 +27,34 @@
     <br>
     <form action="../server/album-list-server.php" method="post">
         <?php
-        include('../server/connect-db.php');
-        $sql = "SELECT * FROM `album_list` WHERE id_band = $idBand ";
-        $query = mysqli_query($connect, $sql);
-        $rowHead = mysqli_num_rows($query);
-        if ($query) {
-            if ($rowHead > 0) {
-                echo "<table>";
-                echo "<tr>";
-                echo "<th>album_name</th>";
-                echo "<th>delete_album</th>";
-                echo "<th>update_album</th>";
-                echo "<tr>";
+            $sql = "SELECT * FROM `album_list` WHERE id_band = $idBand ";
+            // $query = mysqli_query($connect, $sql);
+            // $rowHead = mysqli_num_rows($query);
+            $query = $connect->query($sql);
+            $rowHead = $query->fetchAll();
+            $rowHeadLength = count($rowHead);
 
-                while ($row = mysqli_fetch_assoc($query)) {
+            if ($query) {
+                if ($rowHeadLength  > 0) {
+                    echo "<table>";
                     echo "<tr>";
-                    echo "<td style='text-align: center;'>" . $row['name_album'] . "</td>";
-                    echo "<td><button type='submit' name='delete_album' value=" . serialize($row) . " style='background: crimson'> delete album </button></td>";
-                    echo "<td><button type='submit' name='update_album_data' value=" . serialize($row) . " style='background: yellow;'> update album </button></td>";
-                    echo "</tr>";
+                    echo "<th>album_name</th>";
+                    echo "<th>delete_album</th>";
+                    echo "<th>update_album</th>";
+                    echo "<tr>";
+
+                    foreach ($rowHead as $row) {
+                        echo "<tr>";
+                        echo "<td style='text-align: center;'>" . $row['name_album'] . "</td>";
+                        echo "<td><button type='submit' name='delete_album' value=" . serialize($row) . " style='background: crimson'> delete album </button></td>";
+                        echo "<td><button type='submit' name='update_album_data' value=" . serialize($row) . " style='background: yellow;'> update album </button></td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                    mysqli_free_result($result);
                 }
-                echo "</table>";
-                mysqli_free_result($result);
             }
-        }
-        mysqli_close($connect);
+            mysqli_close($connect);
         ?>
     </form>
     <br>

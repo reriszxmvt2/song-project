@@ -7,24 +7,18 @@
     $goToUpdateAlbum = $_POST['update_album_data'];
     $userUpdateAlbum = $_POST['update_album'];
     $goToSongPage = $_POST['song_list'];
-    
-    // function fetchAlbumList($nameAlbum)
-    // {
-    //     include('./connect-db.php');
-    //     $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbum' AND id_band = '$idBand' ";
-    //     $query = mysqli_query($connect, $sql);
-    //     $album = mysqli_fetch_assoc($query);
 
-    //     return $album;
-    // };
-
-    if (isset($userAddAlbum)) :
+    if (isset($userAddAlbum)) {
         $nameAlbumAdd = $_POST['nameAlbum'];
         $idBand = $_POST['addAlbum'];
-        // $album = fetchAlbumList($nameAlbumAdd);
-        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumAdd' AND id_band = '$idBand'";
-        $query = mysqli_query($connect, $sql);
-        $album = mysqli_fetch_assoc($query);
+        
+        $sql = ' SELECT * FROM `album_list` WHERE name_album = :nameAlbumAdd AND id_band = :idBand ';
+        $preparedSql = $connect->prepare($sql);
+        $preparedSql->execute([
+            ':nameAlbumAdd' => $nameAlbumAdd,
+            ':idBand' => $idBand
+        ]);
+        $album = $preparedSql->fetch();
 
         if ($album) {
             $nameAlbumInDb = $album['name_album'];
@@ -43,37 +37,50 @@
         }
 
         if ($errorsLength == 0) {
-            $sql = "INSERT INTO `album_list`(`name_album`,`id_band`) VALUES ('$nameAlbumAdd','$idBand')";
-            $query = mysqli_query($connect, $sql);
+            $sql = ' INSERT INTO  album_list(name_album, id_band) VALUES (:nameAlbumAdd, :idBand) ';
+            $preparedSql = $connect->prepare($sql);
+            $preparedSql->execute([
+                ':nameAlbumAdd' => $nameAlbumAdd,
+                ':idBand' => $idBand
+            ]);
             header('location: ../client/album-list-client.php');
         }
-    endif;
+    }
 
-    if (isset($userDeleteAlbum)) :
+    if (isset($userDeleteAlbum)) {
         $album = unserialize($userDeleteAlbum);
         $nameAlbum = $album['name_album'];
         $idAlbum = $album['id'];
-        $sql = "DELETE FROM album_list WHERE `album_list`.id = $idAlbum";
-        mysqli_query($connect, $sql);
-        header('location: ../client/album-list-client.php');
-    endif;
 
-    if (isset($goToUpdateAlbum)) :
+        $sql = 'DELETE FROM album_list WHERE `album_list`.id = :nameAlbum';
+        $preparedSql = $connect->prepare($sql);
+        $preparedSql->execute([
+            ':nameAlbum' => $nameAlbum,
+        ]);
+        header('location: ../client/album-list-client.php');
+    }
+
+    if (isset($goToUpdateAlbum)) {
         $album = unserialize($goToUpdateAlbum);
         $_SESSION['idAlbum'] = $album['id'];
         $_SESSION['nameAlbum'] = $album['name_album'];
         $_SESSION['idBand'] = $album['id_band'];
         header('location: ../client/update-album-list-client.php');
-    endif;
-
-    if (isset($userUpdateAlbum)) :
+    }
+ 
+    if (isset($userUpdateAlbum)) {
         $nameAlbumUpdated = $_POST['nameAlbum'];
         $idAlbum = $_POST['idAlbum'];
         $idBand = $_POST['idBand'];
-        // $album = fetchAlbumList($nameAlbumUpdated);
-        $sql = " SELECT * FROM `album_list` WHERE name_album = '$nameAlbumUpdated' AND id_band = '$idBand' AND id != '$idAlbum'";
-        $query = mysqli_query($connect, $sql);
-        $album = mysqli_fetch_assoc($query);
+
+        $sql = 'SELECT * FROM `album_list` WHERE name_album = :nameAlbumUpdated AND id_band = :idBand AND id != :idAlbum';
+        $preparedSql = $connect->prepare($sql);
+        $preparedSql->execute([
+            ':nameAlbumUpdated' => $nameAlbumAdd,
+            ':idBand' => $idBand,
+            ':idAlbum' => $idAlbum,
+        ]);
+        $album = $preparedSql->fetch();
     
         if ($album) {
             $nameAlbumInDb = $album['name_album'];
@@ -94,10 +101,13 @@
         }
     
         if ($errorsLength == 0) {
-            $sql = "UPDATE album_list SET name_album = '$nameAlbumUpdated' WHERE id = '$idAlbum'";
-            $query = mysqli_query($connect, $sql);
+            $sql = 'UPDATE album_list SET name_album = :nameAlbumAdd WHERE id = :idAlbum';
+            // $query = mysqli_query($connect, $sql);
+            $preparedSql = $connect->prepare($sql);
+            $preparedSql->execute([
+                ':nameAlbumAdd' => $nameAlbumAdd,
+                ':idAlbum' => $idAlbum,
+            ]);
             header('location: ../client/album-list-client.php');
         }
-    endif;
-
-    
+    }
