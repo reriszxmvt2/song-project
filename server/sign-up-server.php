@@ -1,30 +1,21 @@
 <?php 
-    include '../model/Authentication-model.php';
-
     session_start();
-    $error = [];
+    include '../model/authentication-model.php';//todo: seesion start first. ทำแล้ว ( ^ w ^ )
     $userSignup = $_POST['signup'];
 
     if (isset($userSignup)) {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        
-        $result = getByUsername($username);//todo: sort by priority. and ไม่ต้องส่ง $connect ไปทุกหน้า. [ ทำแล้ว ( ^ w ^ ) ]
-        $usernameInDb = $result['username'];
+        $authen = new Authentication();//todo: name standard. ทำแล้ว ( ^ w ^ )
+        $result = $authen->getByUsername($username);
 
-        if ($username === $usernameInDb) {
-            array_push($error, 'username already exists.');
-        }
-
-        $errorsListLength = count($error);
-
-        if ($errorsListLength == 0) {
-            createUsername($username, $password);
+        if ($result) {
+            $_SESSION['error'] = 'username already exists.';
+            header('location: ../client/sign-up-client.php');
+        } else {
+            $authen->createUsername($username, $password);
             $_SESSION['username'] = $username;
             $_SESSION['signUpSuccess'] = 'sign up successfully';
             header('location: ../client/index.php');
-        } else {
-            $_SESSION['error'] = 'username already exists.';
-            header('location: ../client/sign-up-client.php');
         }
     }

@@ -1,23 +1,19 @@
 <?php
     session_start();
-    include './connect-db.php' ;
-    include '../model/Authentication-model.php' ;
-
-    $errors = [];
+    include '../model/authentication-model.php';
     $userSignin = $_POST['signin'];
 
     if (isset($userSignin)) {
-        $inputUsername = $_POST['username'];
-        $inputPassword = $_POST['password'];
-
-        $result = getSignin($inputUsername, $inputPassword, $connect);
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $authen = new Authentication();
+        $result = $authen->getSignin($username, $password);
 
         if ($result) {
-            $_SESSION['username'] = $inputUsername;
+            $_SESSION['username'] = $username;
             $_SESSION['signInSuccess'] = 'successfully';
             header('location: ../client/index.php');
         } else {
-            array_push($errors, 'username or password wrong');
             $_SESSION['error'] = 'username or password wrong';
             header('location: ../client/sign-in-client.php');
         }

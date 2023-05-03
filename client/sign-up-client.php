@@ -1,6 +1,6 @@
 <?php
-    include('../server/connect-db.php');
     session_start();
+    include('../server/connect-db.php');
 
     if (isset($_SESSION['username'])) {
         header('location: ./index.php');
@@ -23,7 +23,7 @@
     <form action="../server/sign-up-server.php" method="post">
 
         <div>
-            <?php if (isset($_SESSION['error'])): ?>
+            <?php if (isset($_SESSION['error'])) : ?>
                 <p>
                     <?php echo $_SESSION['error']; ?>
                 </p>

@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include './connect-db.php';
     include '../model/record-list-model.php';
 
     $errors = [];
@@ -12,7 +11,7 @@
 
     if (isset($userAddRecord)) {
         $nameRecordAdd = $_POST['name_record'];
-        $record = fetchRecordList($nameRecordAdd, $connect);
+        $record = fetchRecordList($nameRecordAdd);
 
         if ($record) {
             $nameRecordInDb = $record['name_record'];
@@ -25,7 +24,7 @@
         $errorsListLength = count($errors);
 
         if ($errorsListLength == 0) {
-            addRecord($nameRecordAdd, $connect);
+            addRecord($nameRecordAdd);
             $_SESSION['idRecord'] = $record['id'];
             header('location: ../client/index.php');
         }
@@ -41,7 +40,7 @@
         $rowList = unserialize($userDeleteRecord);
         $nameRecord = $rowList['name_record'];
         $idRecord = $rowList['id'];
-        deleteRecord($idRecord, $connect);
+        deleteRecord($idRecord);
         header('location: ../client/index.php');
     }
 
@@ -61,7 +60,7 @@
     if (isset($userUpdateRecord)) {
         $nameRecordUpdated = $_POST['name_record'];
         $idRecord = $_POST['update_record'];
-        $record = fetchRecordList($nameRecordUpdated, $connect);
+        $record = fetchRecordList($nameRecordUpdated);
 
         if ($record) {
             $nameRecordInDb = $record['name_record'];
@@ -75,7 +74,7 @@
         $errorsListLength = count($errors);
 
         if ($errorsListLength == 0) {
-            updateRecord($nameRecordUpdated, $idRecord, $connect);
+            updateRecord($nameRecordUpdated, $idRecord);
             header('location: ../client/index.php');
         }
 

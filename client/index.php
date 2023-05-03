@@ -1,6 +1,6 @@
 <?php
-    include '../server/connect-db.php';
     session_start();
+    include '../server/connect-db.php';
 
     if (!isset($_SESSION['username'])) {
         header('location: ./sign-in-client.php');
@@ -46,13 +46,11 @@
         <form action="../server/record-list-server.php" method="post">
             <div>
                 <?php
-                $sql = 'SELECT * FROM record_list';
-                $result = $connect->query($sql);
-                $rowInDb = $result->fetchAll();
-                $rowInDbLength = count($rowInDb);
-
-                if ($result) {
-                    if ($rowInDbLength > 0) {
+                    $sql = 'SELECT * FROM record_list';
+                    $result = $connect->query($sql);
+                    $rowInDb = $result->fetchAll();
+                    
+                    if ($result) {
                         echo '<table>';
                         echo '<thead>';
                         echo '<tr>';
@@ -64,7 +62,7 @@
                         echo '</tr>';
                         echo '</thead>';
                         echo '<tbody>';
-
+                    
                         foreach ($rowInDb as $row) {
                             echo '<tr>';
                             echo "<td style='text-align: center;'>" . $row['name_record'] . "</td>";
@@ -80,7 +78,6 @@
                         echo "</tbody>";
                         echo "</table>";
                     }
-                }
                 ?>
             </div>
         </form>
