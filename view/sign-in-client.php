@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../server/connect-db.php');
+    include('../model/connect-db.php');
 
     if (isset($_SESSION['username'])) {
         header('location: ./index.php');
@@ -19,7 +19,7 @@
         <h1>Sign In</h1>
     </div>
 
-    <form action="../server/sign-in-server.php" method="post">
+    <form action="../controller/sign-in-server.php" method="post">
         <div>
             <?php if (isset($_SESSION['error'])): ?>
                 <p>
@@ -40,8 +40,7 @@
             <button type="submit" name="signin">SIGN IN</button>
         </div>
 
-        <p>Register for use ==> <a href="./sign-up-client.php">SIGN UP</a></p>
-
+        <p>Register for use ==> <a href="./sign-up-view.php">SIGN UP</a></p>
     </form>
 
 </body>

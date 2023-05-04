@@ -1,5 +1,5 @@
 <?php
-    function connectionDb() //todo: 100k 
+    function connectionDb()
     {
         $servername = 'localhost';
         $username = 'root';

@@ -1,9 +1,5 @@
 <?php
-    session_start();
-
-    if (isset($_SESSION['username'])) {
-        header('location: ./index.php');
-    }
+    include '../controller/sign-up-controller.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +13,9 @@
 
     <h1>Register</h1>
 
-    <form action="../server/sign-up-server.php" method="post">
+    <form method="post">
         <div>
-            <?php if (isset($_SESSION['error'])) : ?>
-                <p>
-                    <?php echo $_SESSION['error']; ?>
-                </p>
-                <?php unset($_SESSION['error']); ?>
-            <?php endif ?>
+           <p><?php echo $signUpController->error; ?></p>
         </div>
         <div>
             <label>username : </label>
@@ -37,7 +28,6 @@
         <div>
             <input value="sign up" type="submit" name="signup">
         </div>
-
         <p>Have a account to use? ==> <a href="./sign-in-client.php">SIGN IN</a></p>
     </form>
 
