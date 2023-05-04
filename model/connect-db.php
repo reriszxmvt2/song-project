@@ -1,6 +1,5 @@
-<?php //todo: PDO /complete/
-
-    function connectionDb() //todo: run 100k 
+<?php
+    function connectionDb() //todo: 100k 
     {
         $servername = 'localhost';
         $username = 'root';

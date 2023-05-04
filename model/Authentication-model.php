@@ -1,11 +1,11 @@
-<?php 
-    include '../server/connect-db.php';
+<?php
+    include './connect-db.php'; //todo: change folder name. ย้าย connect db ไว้ใน model. ทำแล้ว ( ^ w ^ )
     
-    class Authentication //todo: name standard. ทำแล้ว ( ^ w ^ )
+    class AuthenticationModel//todo: name same name file. ทำแล้ว ( ^ w ^ )
     {
         public $connect;
-        
-        function __construct() 
+
+        function __construct()
         {
             $this->connect = connectionDb();
         }
@@ -14,22 +14,24 @@
         {
             $sql = 'SELECT * FROM user WHERE username = :username AND password = :password';
             $paramValues = [
-                ':username' => $username, 
+                ':username' => $username,
                 ':password' => $password,
             ];
+
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
             $result = $preparedSql->fetch();
 
             return $result;
         }
-        
-        function getByUsername($username) 
+
+        function getByUsername($username)
         {
             $sql = 'SELECT * FROM user WHERE username = :username';
             $paramValues = [
                 ':username' => $username,
             ];
+
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
             $result = $preparedSql->fetch();
@@ -44,7 +46,8 @@
                 ':username' => $username,
                 ':password' => $password,
             ];
-            $preparedSql= $this->connect->prepare($sql);
+
+            $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
         }
     }

@@ -3,14 +3,20 @@
 
     class RecordList
     {
+        public $connect;
+
+        function __construct()
+        {
+            $this->connect = connectionDb();
+        }
+
         function fetchRecordList($nameRecord)
         {
-            global $connect;
             $sql = 'SELECT * FROM record_list WHERE name_record = :nameRecord';
             $paramValues = [
                 ':nameRecord' => $nameRecord,
             ];
-            $preparedSql = $connect->prepare($sql);
+            $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
             $result = $preparedSql->fetch();
 
@@ -19,12 +25,11 @@
 
         function addRecord($nameRecordAdd)
         {
-            global $connect;
             $sql = 'INSERT INTO record_list (name_record)  VALUES (:nameRecordAdd)';
             $paramValues = [
                 ':nameRecordAdd' => $nameRecordAdd,
             ];
-            $preparedSql = $connect->prepare($sql);
+            $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
             $result = $preparedSql->fetch();
 
@@ -33,7 +38,6 @@
 
         function deleteRecord($idRecord)
         {
-            global $connect;
             $sql = 'DELETE record_list.*, band_list.*, album_list.*, song_list.* 
                 FROM record_list 
                 LEFT JOIN band_list 
@@ -46,19 +50,26 @@
             $paramValues = [
                 ':idRecord' => $idRecord,
             ];
-            $preparedSql = $connect->prepare($sql);
+            $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
         }
 
         function updateRecord($nameRecordUpdated, $idRecord)
         {
-            global $connect;
             $sql = 'UPDATE record_list SET name_record = :nameRecordUpdated WHERE id = :idRecord';
             $paramValues = [
                 ':nameRecordUpdated' => $nameRecordUpdated,
                 ':idRecord' => $idRecord,
             ];
-            $preparedSql = $connect->prepare($sql);
+            $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
+        }
+        
+        function showRecordList()
+        {
+            $sql = 'SELECT * FROM record_list';
+            $result = $this->connect->query($sql);
+
+            return $result;
         }
     }

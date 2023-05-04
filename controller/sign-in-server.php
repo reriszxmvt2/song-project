@@ -6,7 +6,7 @@
     if (isset($userSignin)) {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $authen = new Authentication();
+        $authen = new AuthenticationModel();
         $result = $authen->getSignin($username, $password);
 
         if ($result) {
@@ -17,4 +17,4 @@
             $_SESSION['error'] = 'username or password wrong';
             header('location: ../client/sign-in-client.php');
         }
-    }
+}

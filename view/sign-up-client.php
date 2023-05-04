@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include('../server/connect-db.php');
 
     if (isset($_SESSION['username'])) {
         header('location: ./index.php');
@@ -16,12 +15,9 @@
 
 <body>
 
-    <div class="header">
-        <h1>Register</h1>
-    </div>
+    <h1>Register</h1>
 
     <form action="../server/sign-up-server.php" method="post">
-
         <div>
             <?php if (isset($_SESSION['error'])) : ?>
                 <p>
@@ -43,7 +39,6 @@
         </div>
 
         <p>Have a account to use? ==> <a href="./sign-in-client.php">SIGN IN</a></p>
-
     </form>
 
 </body>

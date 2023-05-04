@@ -46,8 +46,8 @@
         <form action="../server/record-list-server.php" method="post">
             <div>
                 <?php
-                    $sql = 'SELECT * FROM record_list';
-                    $result = $connect->query($sql);
+                    $record = new RecordList();
+                    $result = $record->showRecordList();
                     $rowInDb = $result->fetchAll();
                     
                     if ($result) {
