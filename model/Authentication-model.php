@@ -1,9 +1,9 @@
-<?php
+<?php 
     include 'connect-db.php'; 
-    //todo: change folder name. ย้าย connect db ไว้ใน model. ทำแล้ว ( ^ w ^ )
-    class AuthenticationModel//todo: name same file name. ทำแล้ว ( ^ w ^ )
+
+    class AuthenticationModel
     {
-        public $connect;
+        public $connect; //todo: review oop
 
         function __construct()
         {

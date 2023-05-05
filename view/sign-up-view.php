@@ -10,12 +10,12 @@
 </head>
 
 <body>
-
     <h1>Register</h1>
-
     <form method="post">
         <div>
-           <p><?php echo $signUpController->error; ?></p>
+            <p style="color: red; font-size: x-large; font-weight: bold; ">
+                <?php echo $error; ?>
+            </p>
         </div>
         <div>
             <label>username : </label>
@@ -28,9 +28,8 @@
         <div>
             <input value="sign up" type="submit" name="signup">
         </div>
-        <p>Have a account to use? ==> <a href="./sign-in-client.php">SIGN IN</a></p>
     </form>
-
+    <p>Have a account to use? ==> <a href="./sign-in-client.php">SIGN IN</a></p>
 </body>
 
 </html>
