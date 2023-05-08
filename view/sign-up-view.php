@@ -14,7 +14,7 @@
     <form method="post">
         <div>
             <p style="color: red; font-size: x-large; font-weight: bold; ">
-                <?php echo $error; ?>
+                <?php echo $error[0]; ?>
             </p>
         </div>
         <div>

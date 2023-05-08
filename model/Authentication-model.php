@@ -1,53 +1,18 @@
 <?php 
     include 'connect-db.php'; 
-
+    include 'signup-model.php';
+    include 'signin-model.php';
+        //todo: review oop ( ^ v ^ )/
     class AuthenticationModel
     {
-        public $connect; //todo: review oop
+        public $connect;
+        public $username;
+        public $password;
 
-        function __construct()
+        public function __construct($username, $password)
         {
             $this->connect = connectionDb();
-        }
-
-        function getSignin($username, $password)
-        {
-            $sql = 'SELECT * FROM user WHERE username = :username AND password = :password';
-            $paramValues = [
-                ':username' => $username,
-                ':password' => $password,
-            ];
-
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-            $result = $preparedSql->fetch();
-
-            return $result;
-        }
-
-        function getByUsername($username)
-        {
-            $sql = 'SELECT * FROM user WHERE username = :username';
-            $paramValues = [
-                ':username' => $username,
-            ];
-
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-            $result = $preparedSql->fetch();
-
-            return $result;
-        }
-
-        function createUsername($username, $password)
-        {
-            $sql = 'INSERT INTO user (username, password) VALUES (:username, :password)';
-            $paramValues = [
-                ':username' => $username,
-                ':password' => $password,
-            ];
-
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
+            $this->username = $username;
+            $this->password = $password;
         }
     }

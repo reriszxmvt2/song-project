@@ -26,20 +26,15 @@
 
     <h1>Home Page</h1>
     <div>
-        <?php if (isset($_SESSION['signUpSuccess'])): ?>
             <p style="color :green;">
-                <?php echo $_SESSION['signUpSuccess']; ?>
+                <?php echo $_GET['signupSuccess']; ?>
             </p>
-            <?php unset($_SESSION['signUpSuccess']); ?>
-        <?php endif; ?>
     </div>
     <div>
-        <?php if (isset($_SESSION['username'])): ?>
             <p>Hello!! :
                 <?php echo $_SESSION['username']; ?>
             </p>
             <p><a href="index.php?logout='1'"> Logout </a></p>
-        <?php endif ?>
     </div>
 
     <div>
