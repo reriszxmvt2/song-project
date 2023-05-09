@@ -1,27 +1,28 @@
 <?php 
     session_start();
-    include '../model/authentication-model.php';
+    include '../model/signup-model.php';
 
-    $signupModel = new SignupModel($username, $password);//todo: change authen to model. ทำแล้ว ( ^ v ^ )/
+    $signupModel = new SignupModel();
 
     $error = [];
 
     if (isset($_SESSION['username'])) {
-        header('location: ./index.php');
+        header('location: ../view/index.php');
     }
 
-    if (isset($_POST)) {
+    if (isset($_POST['signup'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $result = $signupModel->getByUsername($username);  
-    }
-    
-    if ($result) {
-        $error[] = 'username already exits.';
-    }
 
-    if (isset($_POST['signup']) && count($error) == 0) {
-        $signupModel->createUsername($username, $password);
-        $_SESSION['username'] = $username;
-        header('location: ../view/index.php?signupSuccess=sign up successfully'); //todo: ห้่่ามใช้ session send sign up successfully. ( ^ v ^ )/
+        if ($result) {
+            $error[] = 'username already exits.';
+        }
+
+        if (count($error) == 0) {
+            $signupModel->createUsername($username, $password);
+            $_SESSION['username'] = $username;
+            $_SEESION['signupSuccess'] = 'sign up successfully';
+            header('location: ../view/index.php');
+        }
     }

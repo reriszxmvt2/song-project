@@ -1,11 +1,11 @@
 <?php
     session_start();
-    include '../model/authentication-model.php';
+    include '../model/signin-model.php';
     
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    $authen = new SigninModel($username, $password);
+    $authen = new SigninModel();
     $result = $authen->getSignin($username, $password);
 
     if ($result) {
