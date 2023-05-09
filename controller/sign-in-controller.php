@@ -1,13 +1,13 @@
 <?php
-    session_start();
     include '../model/signin-model.php';
+    include '../view/sign-in-view.php';
     
     $username = $_POST['username'];
     $password = $_POST['password'];
     
     $authen = new SigninModel();
     $result = $authen->getSignin($username, $password);
-
+    
     if ($result) {
         $_SESSION['username'] = $username;
         header('location: ../view/index.php');

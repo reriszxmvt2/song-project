@@ -1,7 +1,3 @@
-<?php
-    include '../controller/sign-up-controller.php';
-?>
-
 <!DOCTYPE html>
 <html>
 

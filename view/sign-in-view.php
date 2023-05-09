@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include('../model/connect-db.php');
 
     if (isset($_SESSION['username'])) {
         header('location: ./index.php');

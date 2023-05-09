@@ -3,7 +3,7 @@
     include '../model/connect-db.php';
 
     if (!isset($_SESSION['username'])) {
-        header('location: ./sign-in-client.php');
+        header('location: ./sign-in-view.php');
     }
 
     if (isset($_GET['logout'])) {

@@ -1,7 +1,8 @@
 <?php 
     session_start();
     include '../model/signup-model.php';
-
+    include '../view/sign-up-view.php';
+    
     $signupModel = new SignupModel();
 
     $error = [];
