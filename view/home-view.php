@@ -17,7 +17,7 @@
 
     <form method="post">
         <div>
-            <?php if ($result): ?>
+            <?php if ($results['result']): ?>
                 <table>
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($rowInDb as $row): ?>
+                        <?php foreach ($results['rowInDb'] as $row): ?>
                             <tr>
                                 <td>
                                     <p style="text-align: center;">
@@ -53,8 +53,9 @@
                                         type="button">update record</button>
                                 </td>
                                 <td>
-                                    <button type="submit" value="bandList" name="bandList" style="background : skyblue;">band
-                                        list</button>
+                                    <button style="background : skyblue;" type="submit" value="bandList" name="bandList">
+                                        band slist
+                                    </button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -65,7 +66,7 @@
     </form>
     <br>
     <div>
-        <button onclick="location.href='../controller/record-add-controller.php'" type="submit"> add record </button>
+        <button onclick="location.href='../controller/record-add-controller.php'" type="submit" style="background : lightgreen;"> add record </button>
     </div>
 
 </body>

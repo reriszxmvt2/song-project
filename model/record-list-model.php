@@ -5,18 +5,24 @@
     {
         public function getRecordList()
         {
-          $sql = 'SELECT * FROM record_list';
-          $result = $this->connect->query($sql);
+            $sql = 'SELECT * FROM record_list';
+            $result = $this->connect->query($sql);
+            $rowInDb = $result->fetchAll();
 
-          return $result;
+            $results = [
+                'result' => $result,
+                'rowInDb' => $rowInDb,
+            ];
+
+            return $results;
         }
 
         public function getBandList($rowId)
         {
-          $sql = 'SELECT * FROM `band_list` WHERE id_record = ' . $rowId . '';
-          $result = $this->connect->query($sql)->fetchAll();
+            $sql = 'SELECT * FROM `band_list` WHERE id_record = ' . $rowId . '';
+            $result = $this->connect->query($sql)->fetchAll();
 
-          return $result;
+            return $result;
         }
 
         public function checkRecordForAdd($nameRecord)
@@ -50,11 +56,11 @@
         public function deleteRecord($idRecordDelete)
         {
             $sql = 'DELETE record_list.*, band_list.*, album_list.*, song_list.* 
-                FROM record_list 
-                    LEFT JOIN band_list ON `record_list`.id = `band_list`.id_record 
-                    LEFT JOIN album_list ON `band_list`.id = `album_list`.id_band 
-                    LEFT JOIN song_list ON `album_list`.id = `song_list`.id_album
-                WHERE `record_list`.id = :idRecordDelete';
+                        FROM record_list 
+                            LEFT JOIN band_list ON `record_list`.id = `band_list`.id_record 
+                            LEFT JOIN album_list ON `band_list`.id = `album_list`.id_band 
+                            LEFT JOIN song_list ON `album_list`.id = `song_list`.id_album
+                        WHERE `record_list`.id = :idRecordDelete';
             $paramValues = [
                 ':idRecordDelete' => $idRecordDelete,
             ];

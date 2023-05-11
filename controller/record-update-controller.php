@@ -3,11 +3,12 @@
 
     $nameRecordUpdate = $_GET['nameRecordUpdate'];
     $idRecordUpdate = $_GET['idRecordUpdate'];
-    $recordListModel = new RecordListModel;
 
     if (isset($_POST['userUpdateRecord'])) {
         $nameRecordUpdate = $_POST['userNameRecordUpdate'];
         $idRecordUpdate = $_POST['idRecordUpdate'];
+
+        $recordListModel = new RecordListModel;
         $result = $recordListModel->checkRecordForUpdate($nameRecordUpdate, $idRecordUpdate);
         
         if ($result) {

@@ -18,7 +18,6 @@
         $recordListModel->deleteRecord($idRecordDelete);
     }
 
-    $result = $recordListModel->getRecordList();
-    $rowInDb = $result->fetchAll();
-    //todo: fetchAll model
+    $results = $recordListModel->getRecordList(); //todo: fetchAll model
+
     include '../view/home-view.php';

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include '../model/signin-model.php';
+    include '../model/get-user.php';
 
     if (isset($_SESSION['username'])) {
         header('location: index.php');
@@ -10,7 +10,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         
-        $signinModal = new SigninModel();
+        $signinModal = new GetUser();
         $result = $signinModal->getSignin($username, $password);
 
         if ($result) {

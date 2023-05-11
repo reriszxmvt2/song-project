@@ -1,7 +1,23 @@
-<?php //todo: name model.
+<?php
     include 'base-model.php';
-    class SignupModel extends BaseModel
+
+    class GetUser extends BaseModel
     {
+        public function getSignin($username, $password)
+        {
+            $sql = 'SELECT * FROM user WHERE username = :username AND password = :password';
+            $paramValues = [
+                ':username' => $username,
+                ':password' => $password,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+            $result = $preparedSql->fetch();
+
+            return $result;
+        }
+
         public function getByUsername($username)
         {
             $sql = 'SELECT * FROM user WHERE username = :username';

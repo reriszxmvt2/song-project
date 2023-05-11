@@ -1,9 +1,7 @@
 <?php 
     session_start();
-    include '../model/signup-model.php';
-    //todo: refactor object.
-    $signupModel = new SignupModel();
-
+    include '../model/get-user.php';
+    
     $error = [];
 
     if (isset($_SESSION['username'])) {
@@ -13,6 +11,8 @@
     if (isset($_POST['signup'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
+
+        $signupModel = new GetUser(); //todo: refactor object. ทำแล้ว
         $result = $signupModel->getByUsername($username);  
 
         if ($result) {
