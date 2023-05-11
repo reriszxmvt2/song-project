@@ -1,6 +1,6 @@
-<?php 
+<?php
     session_start();
-    include ('./connect-db.php');
+    include('./connect-db.php');
     $errors = [];
     $userAddAlbum = $_POST['addAlbum'];
     $userDeleteAlbum = $_POST['delete_album'];
@@ -11,7 +11,7 @@
     if (isset($userAddAlbum)) {
         $nameAlbumAdd = $_POST['nameAlbum'];
         $idBand = $_POST['addAlbum'];
-        
+
         $sql = ' SELECT * FROM `album_list` WHERE name_album = :nameAlbumAdd AND id_band = :idBand ';
         $preparedSql = $connect->prepare($sql);
         $preparedSql->execute([
@@ -67,7 +67,7 @@
         $_SESSION['idBand'] = $album['id_band'];
         header('location: ../client/update-album-list-client.php');
     }
- 
+
     if (isset($userUpdateAlbum)) {
         $nameAlbumUpdated = $_POST['nameAlbum'];
         $idAlbum = $_POST['idAlbum'];
@@ -81,25 +81,25 @@
             ':idAlbum' => $idAlbum,
         ]);
         $album = $preparedSql->fetch();
-    
+
         if ($album) {
             $nameAlbumInDb = $album['name_album'];
             $idAlbumInDb = $album['id'];
             $idBandInDbAlbum = $album['id_band'];
-    
+
             if ($nameAlbumUpdated == $nameAlbumInDb && $idAlbum != $idAlbumInDb) {
                 array_push($errors, 1);
             }
         }
-    
+
         $errorsLength = count($errors);
-    
+
         if ($errorsLength != 0) {
             $_SESSION['error'] = 'Name Album Already Exists.';
             $_SESSION['nameAlbum'] = $nameAlbumUpdated;
             header('location: ../client/update-album-list-client.php');
         }
-    
+
         if ($errorsLength == 0) {
             $sql = 'UPDATE album_list SET name_album = :nameAlbumAdd WHERE id = :idAlbum';
             // $query = mysqli_query($connect, $sql);

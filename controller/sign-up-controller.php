@@ -1,7 +1,7 @@
-<?php 
+<?php
     session_start();
     include '../model/user-model.php';
-    
+
     $error = [];
 
     if (isset($_SESSION['username'])) {
@@ -13,10 +13,10 @@
         $password = $_POST['password'];
 
         $userModel = new UserModel(); //todo: refactor object. ทำแล้ว
-        $result = $userModel->getByUsername($username);  
+        $result = $userModel->getByUsername($username);
 
         if ($result) {
-            $error[] = 'username already exits.'; 
+            $error[] = 'username already exits.';
         }
 
         if (count($error) == 0) {

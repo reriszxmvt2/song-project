@@ -26,7 +26,7 @@
             $nameBandInDb = $band['name_band'];
             $idRecordInDb = $band['id_record'];
             $idBandInDb = $band['id'];
-          
+
             if ($nameBandAdd == $nameBandInDb && $idBandInDb != $idBand) {
                 array_push($errors, 1);
             }
@@ -103,7 +103,7 @@
         }
     }
 
-    if (isset($toAlbumPage)){
+    if (isset($toAlbumPage)) {
         $band = unserialize($_POST['toAlbumPage']);
         $_SESSION['id'] = $band['id'];
         $_SESSION['id_record'] = $band['id_record'];

@@ -18,5 +18,5 @@
         $idRecordDelete = $_POST['idRecordDelete'];
         $recordModel->deleteRecord($idRecordDelete);
     }
-  
+
     include '../view/home-view.php';

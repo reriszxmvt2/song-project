@@ -1,4 +1,4 @@
-<?php 
+<?php
     include '../model/record-model.php';
 
     if (isset($_POST['nameRecordAdd'])) {
