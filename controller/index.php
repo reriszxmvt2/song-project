@@ -1,6 +1,9 @@
 <?php
     session_start();
-    include '../model/record-list-model.php';
+    include '../model/record-model.php';
+
+    $recordModel = new RecordModel();
+    $results = $recordModel->getRecordList();
 
     if (!isset($_SESSION['username'])) {
         header('location: sign-in-controller.php');
@@ -13,11 +16,7 @@
 
     if (isset($_POST['deleteRecord'])) {
         $idRecordDelete = $_POST['idRecordDelete'];
-
-        $recordListModel = new RecordListModel();
-        $recordListModel->deleteRecord($idRecordDelete);
+        $recordModel->deleteRecord($idRecordDelete);
     }
-
-    $results = $recordListModel->getRecordList();
-
+  
     include '../view/home-view.php';

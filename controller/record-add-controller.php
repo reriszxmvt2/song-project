@@ -1,16 +1,16 @@
 <?php 
-    include '../model/record-list-model.php';
+    include '../model/record-model.php';
 
     if (isset($_POST['nameRecordAdd'])) {
         $nameRecordAdd = $_POST['nameRecordAdd'];
 
-        $recordListModel = new RecordListModel;
-        $result = $recordListModel->checkRecordForAdd($nameRecordAdd);
+        $recordModel = new RecordModel;
+        $result = $recordModel->checkRecordForAdd($nameRecordAdd);
 
         if ($result) {
             $error = 'username already exits';
         } else {
-            $recordListModel->addRecord($nameRecordAdd);
+            $recordModel->addRecord($nameRecordAdd);
             header('location: index.php');
         }
     }
