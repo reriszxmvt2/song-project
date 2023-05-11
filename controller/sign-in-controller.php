@@ -9,6 +9,7 @@
     if (isset($_POST['signin'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
+        
         $signinModal = new SigninModel();
         $result = $signinModal->getSignin($username, $password);
 

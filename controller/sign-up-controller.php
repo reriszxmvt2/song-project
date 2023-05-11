@@ -1,7 +1,7 @@
 <?php 
     session_start();
     include '../model/signup-model.php';
-    
+    //todo: refactor object.
     $signupModel = new SignupModel();
 
     $error = [];

@@ -1,6 +1,6 @@
 <?php
     include 'base-model.php';
-    
+    //todo: refactor signin and signup -> authentication.
     class SigninModel extends BaseModel
     {
         public function getSignin($username, $password)

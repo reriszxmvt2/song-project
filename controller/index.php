@@ -20,5 +20,5 @@
 
     $result = $recordListModel->getRecordList();
     $rowInDb = $result->fetchAll();
-
+    //todo: fetchAll model
     include '../view/home-view.php';
