@@ -3,7 +3,6 @@
     include '../model/record-model.php';
 
     $recordModel = new RecordModel();
-    $results = $recordModel->getRecordList();
 
     if (!isset($_SESSION['username'])) {
         header('location: sign-in-controller.php');
@@ -18,5 +17,7 @@
         $idRecordDelete = $_POST['idRecordDelete'];
         $recordModel->deleteRecord($idRecordDelete);
     }
+
+    $results = $recordModel->getRecordList();
 
     include '../view/home-view.php';

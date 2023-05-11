@@ -17,7 +17,7 @@
 
     <form method="post">
         <div>
-            <?php if ($results['result']): ?>
+            <?php if ($results['result']) : ?>
                 <table>
                     <thead>
                         <tr>
@@ -29,30 +29,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($results['rowInDb'] as $row): ?>
+                        <?php foreach ($results['rowInDb'] as $row) : ?>
                             <tr>
                                 <td>
                                     <p style="text-align: center;">
                                         <?php echo $row['name_record']; ?>
                                     </p>
                                 </td>
-                                <?php $resultBand = $recordModel->getBandListLength($row['id']); ?>
                                 <td>
                                     <p style="text-align: center;">
-                                        <?php 
-                                            print_r($resultBand['bandLength']);
-                                        ?>
+                                        <?php echo $row['bandLength']; ?>
                                     </p>
                                 </td>
                                 <td>
                                     <input type="hidden" name="idRecordDelete" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" name="deleteRecord" value="deleteRecord"
-                                        style="background : crimson;">delete record</button>
+                                    <button type="submit" name="deleteRecord" value="deleteRecord" style="background : crimson;">delete record</button>
                                 </td>
                                 <td>
-                                    <button style="background : yellow;"
-                                        onclick="location.href='../controller/record-update-controller.php?idRecordUpdate=<?php echo $row['id']; ?>&nameRecordUpdate=<?php echo $row['name_record']; ?>'"
-                                        type="button">update record</button>
+                                    <button style="background : yellow;" onclick="location.href='../controller/record-update-controller.php?idRecordUpdate=<?php echo $row['id']; ?>&nameRecordUpdate=<?php echo $row['name_record']; ?>'" type="button">update record</button>
                                 </td>
                                 <td>
                                     <button style="background : skyblue;" type="submit" value="bandList" name="bandList">

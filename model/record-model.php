@@ -5,7 +5,10 @@
     {
         public function getRecordList()
         {
-            $sql = 'SELECT * FROM record';
+            $sql = 'SELECT `record`.id, `record`.name_record, count(`band_list`.id_record) AS bandLength
+                    FROM record 
+                        LEFT JOIN band_list ON `record`.id = `band_list`.id_record 
+                    GROUP BY `record`.id;';
             $result = $this->connect->query($sql);
             $rowInDb = $result->fetchAll();
             $results = [
@@ -14,20 +17,6 @@
             ];
 
             return $results;
-        }
-
-        public function getBandListLength($idRecord)
-        {
-            $sql = 'SELECT COUNT(*) as bandLength FROM band_list WHERE id_record = :idRecord';
-            $paramValues = [
-                ':idRecord' => $idRecord,
-            ];
-
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-            $result = $preparedSql->fetch();
-
-            return $result;
         }
 
         public function checkRecordForAdd($nameRecord)
