@@ -25,7 +25,7 @@
             <input value="sign up" type="submit" name="signup">
         </div>
     </form>
-    <p>Have a account to use? ==> <a href="./sign-in-client.php">SIGN IN</a></p>
+    <p>Have a account to use? ==> <a href="sign-in-controller.php">SIGN IN</a></p>
 </body>
 
 </html>

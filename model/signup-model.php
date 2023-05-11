@@ -1,6 +1,6 @@
 <?php
-    include 'database-connector.php';
-    class SignupModel extends DatabaseConnector
+    include 'base-model.php';
+    class SignupModel extends BaseModel
     {
         public function getByUsername($username)
         {

@@ -1,10 +1,3 @@
-<?php
-    session_start();
-
-    if (isset($_SESSION['username'])) {
-        header('location: ./index.php');
-    }
-?>
 <!DOCTYPE html>
 <html>
 
@@ -18,14 +11,9 @@
         <h1>Sign In</h1>
     </div>
 
-    <form action="../controller/sign-in-server.php" method="post">
+    <form method="post">
         <div>
-            <?php if (isset($_SESSION['error'])): ?>
-                <p>
-                    <?php echo $_SESSION['error']; ?>
-                </p>
-                <?php unset($_SESSION['error']); ?>
-            <?php endif ?>
+            <p><?php echo $error; ?></p>
         </div>
         <div>
             <label for="username">username : </label>
@@ -39,7 +27,7 @@
             <button type="submit" name="signin">SIGN IN</button>
         </div>
 
-        <p>Register for use ==> <a href="./sign-up-view.php">SIGN UP</a></p>
+        <p>Register for use ==> <a href="sign-up-controller.php">SIGN UP</a></p>
     </form>
 
 </body>

@@ -1,6 +1,7 @@
 <?php
-    include 'database-connector.php';
-    class SigninModel extends DatabaseConnector
+    include 'base-model.php';
+    
+    class SigninModel extends BaseModel
     {
         public function getSignin($username, $password)
         {

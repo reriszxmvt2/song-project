@@ -1,14 +1,13 @@
 <?php 
     session_start();
     include '../model/signup-model.php';
-    include '../view/sign-up-view.php';
     
     $signupModel = new SignupModel();
 
     $error = [];
 
     if (isset($_SESSION['username'])) {
-        header('location: ../view/index.php');
+        header('location: index.php');
     }
 
     if (isset($_POST['signup'])) {
@@ -17,13 +16,14 @@
         $result = $signupModel->getByUsername($username);  
 
         if ($result) {
-            $error[] = 'username already exits.';
+            $error[] = 'username already exits.'; 
         }
 
         if (count($error) == 0) {
             $signupModel->createUsername($username, $password);
             $_SESSION['username'] = $username;
-            $_SEESION['signupSuccess'] = 'sign up successfully';
-            header('location: ../view/index.php');
+            header('location: index.php');
         }
     }
+
+    include '../view/sign-up-view.php';
