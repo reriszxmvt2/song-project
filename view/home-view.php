@@ -36,10 +36,10 @@
                                         <?php echo $row['name_record']; ?>
                                     </p>
                                 </td>
-                                <?php $resultBand = $recordListModel->getBandList($row['id']); ?>
+                                <?php $resultBand = $recordListModel->getBandListLength($row['id']); ?>
                                 <td>
                                     <p style="text-align: center;">
-                                        <?php echo count($resultBand); ?>
+                                        <?php print_r($resultBand['bandLength']); ?>
                                     </p>
                                 </td>
                                 <td>

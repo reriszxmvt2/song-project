@@ -17,10 +17,16 @@
             return $results;
         }
 
-        public function getBandList($rowId)
+        public function getBandListLength($idRecord)
         {
-            $sql = 'SELECT * FROM `band_list` WHERE id_record = ' . $rowId . '';
-            $result = $this->connect->query($sql)->fetchAll();
+            $sql = 'SELECT COUNT(*) as bandLength FROM band_list WHERE id_record = :idRecord';
+            $paramValues = [
+                ':idRecord' => $idRecord,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+            $result = $preparedSql->fetch();
 
             return $result;
         }

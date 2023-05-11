@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include '../model/get-user.php';
+    include '../model/user-model.php';
     
     $error = [];
 
@@ -12,15 +12,15 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $signupModel = new GetUser(); //todo: refactor object. ทำแล้ว
-        $result = $signupModel->getByUsername($username);  
+        $userModel = new UserModel(); //todo: refactor object. ทำแล้ว
+        $result = $userModel->getByUsername($username);  
 
         if ($result) {
             $error[] = 'username already exits.'; 
         }
 
         if (count($error) == 0) {
-            $signupModel->createUsername($username, $password);
+            $userModel->createUsername($username, $password);
             $_SESSION['username'] = $username;
             header('location: index.php');
         }

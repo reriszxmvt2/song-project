@@ -1,7 +1,7 @@
 <?php
     include 'base-model.php';
 
-    class GetUser extends BaseModel
+    class UserModel extends BaseModel
     {
         public function getSignin($username, $password)
         {

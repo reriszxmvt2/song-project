@@ -1,10 +1,10 @@
 <?php 
     include '../model/record-list-model.php';
 
-    $recordListModel = new RecordListModel;
-
     if (isset($_POST['nameRecordAdd'])) {
         $nameRecordAdd = $_POST['nameRecordAdd'];
+
+        $recordListModel = new RecordListModel;
         $result = $recordListModel->checkRecordForAdd($nameRecordAdd);
 
         if ($result) {
