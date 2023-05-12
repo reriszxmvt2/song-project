@@ -15,7 +15,7 @@
         $error = 'Record Name Already Exist.';
       } else {
         $recordModel->updateRecord($nameRecordUpdate, $idRecordUpdate);
-        header('location: index.php');
+        header('location: home-controller.php');
       }
     }
 

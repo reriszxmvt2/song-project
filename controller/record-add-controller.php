@@ -11,7 +11,7 @@
             $error = 'username already exits';
         } else {
             $recordModel->addRecord($nameRecordAdd);
-            header('location: index.php');
+            header('location: home-controller.php');
         }
     }
 

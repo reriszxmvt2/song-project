@@ -20,7 +20,7 @@
             </div>
             <button type="submit" value="userAddRecord" name="userAddRecord">add record</button>
         </form>
-        <a href="../controller/index.php">cancel</a>
+        <a href="../controller/home-controller.php">cancel</a>
     </div>
 </body>
 

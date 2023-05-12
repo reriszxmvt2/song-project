@@ -15,7 +15,7 @@
 
         if ($result) {
             $_SESSION['username'] = $username;
-            header('location: index.php');
+            header('location: home-controller.php');
         } else {
             $error = 'username or password wrong';
         }

@@ -25,7 +25,7 @@
         <button type="submit" name="userUpdateRecord" value="userUpdateRecord">update record</button>
     </form>
     <br>
-    <a href="../controller/index.php">cancel</a>
+    <a href="../controller/home-controller.php">cancel</a>
 </body>
 
 </html>

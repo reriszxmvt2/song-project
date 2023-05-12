@@ -22,7 +22,7 @@
         if (count($error) == 0) {
             $userModel->createUsername($username, $password);
             $_SESSION['username'] = $username;
-            header('location: index.php');
+            header('location: home-controller.php');
         }
     }
 

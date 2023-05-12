@@ -12,7 +12,7 @@
         <p>Hello!! :
             <?php echo $_SESSION['username']; ?>
         </p>
-        <p><a href="index.php?logout='1'"> Logout </a></p>
+        <p><a href="home-controller.php?logout='1'"> Logout </a></p>
     </div>
 
     <form method="post">
