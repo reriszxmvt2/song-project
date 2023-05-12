@@ -6,7 +6,6 @@
 
     if (isset($_POST['userUpdateRecord'])) { //todo: fix mystery bug;
       $nameRecordUpdate = $_POST['userNameRecordUpdate'];
-      // $idRecordUpdate = $_POST['idRecordUpdate'];
 
       $recordModel = new RecordModel();
       $result = $recordModel->checkRecordForUpdate($nameRecordUpdate, $idRecordUpdate);

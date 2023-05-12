@@ -3,10 +3,10 @@
     include '../model/record-model.php';
 
     if (!isset($_SESSION['username'])) {
-        header('location: sign-in-controller.php');
+        header('location: sign-in-controller.php'); //todo: rectactor ให้ใช้ร่วมกัน
     }
 
-    if (isset($_GET['logout'])) { //todo: refactor.
+    if (isset($_POST['logout'])) { //todo: refactor.
         session_destroy();
         header('location: ../controller/sign-in-controller.php');
     }

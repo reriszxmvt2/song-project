@@ -9,9 +9,9 @@
             <p>Hello!! :
                 <?php echo $_SESSION['username']; ?>
             </p>
-            <p><a href="home-controller.php?logout='1'"> Logout </a></p>
         </div>
         <form method="post">
+        <button name="logout" value="logout" type="submit"> Logout </button>
             <div>
                 <?php if ($results['result']) : ?>
                     <table>
