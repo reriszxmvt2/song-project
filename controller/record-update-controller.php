@@ -4,18 +4,18 @@
     $nameRecordUpdate = $_GET['nameRecordUpdate'];
     $idRecordUpdate = $_GET['idRecordUpdate'];
 
-    if (isset($_POST['userUpdateRecord'])) {
+    if (isset($_POST['userUpdateRecord'])) { //todo: fix mystery bug;
       $nameRecordUpdate = $_POST['userNameRecordUpdate'];
-      $idRecordUpdate = $_POST['idRecordUpdate'];
+      // $idRecordUpdate = $_POST['idRecordUpdate'];
 
-      $recordModel = new RecordModel;
+      $recordModel = new RecordModel();
       $result = $recordModel->checkRecordForUpdate($nameRecordUpdate, $idRecordUpdate);
 
       if ($result) {
         $error = 'Record Name Already Exist.';
       } else {
         $recordModel->updateRecord($nameRecordUpdate, $idRecordUpdate);
-        header('location: home-controller.php');
+        header('location: ./home-controller.php');
       }
     }
 

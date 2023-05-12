@@ -3,7 +3,7 @@
 
     class UserModel extends BaseModel
     {
-        public function getSignin($username, $password)
+        public function getSignin($username, $password)//todo: change name 
         {
             $sql = 'SELECT * FROM user WHERE username = :username AND password = :password';
             $paramValues = [
@@ -32,7 +32,7 @@
             return $result;
         }
 
-        public function createUsername($username, $password)
+        public function createUsername($username, $password)//todo: change name
         {
             $sql = 'INSERT INTO user (username, password) VALUES (:username, :password)';
             $paramValues = [

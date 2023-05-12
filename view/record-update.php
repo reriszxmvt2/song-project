@@ -13,14 +13,15 @@
 
     <form method="post">
         <div>
+            <?php if (isset($error)) : ?>
             <p>
                 <?php echo $error; ?>
             </p>
+            <?php endif; ?>
         </div>
         <div>
             <label> name_record : </label>
             <input type="text" name="userNameRecordUpdate" value="<?php echo $nameRecordUpdate; ?>" required>
-            <input type="hidden" name="idRecordUpdate" value="<?php echo $idRecordUpdate; ?>">
         </div>
         <button type="submit" name="userUpdateRecord" value="userUpdateRecord">update record</button>
     </form>

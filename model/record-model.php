@@ -3,14 +3,16 @@
 
     class RecordModel extends BaseModel
     {
-        public function getRecordList()
+        public function getRecordList() //todo: format sql.
         {
-            $sql = 'SELECT `record`.id, `record`.name_record, count(`band_list`.id_record) AS bandLength
-                    FROM record 
-                        LEFT JOIN band_list ON `record`.id = `band_list`.id_record 
-                    GROUP BY `record`.id;';
+            $sql = 'SELECT  record.id,
+                            record.name_record,
+                            count(band_list.id_record) AS bandLength
+                    FROM record
+                        LEFT JOIN band_list ON record.id = band_list.id_record
+                    GROUP BY record.id';
             $result = $this->connect->query($sql);
-            $rowInDb = $result->fetchAll();
+            $rowInDb = $result->fetchAll(); //todo: return แค่ fetchAll ไป
             $results = [
                 'result' => $result,
                 'rowInDb' => $rowInDb,
@@ -19,9 +21,11 @@
             return $results;
         }
 
-        public function checkRecordForAdd($nameRecord)
+        public function checkRecordForAdd($nameRecord) //todo: change name 
         {
-            $sql = 'SELECT * FROM record WHERE name_record = :nameRecord';
+            $sql = 'SELECT *
+                    FROM record
+                    WHERE name_record = :nameRecord';
             $paramValues = [
                 ':nameRecord' => $nameRecord,
             ];
@@ -35,7 +39,8 @@
 
         public function addRecord($nameRecordAdd)
         {
-            $sql = 'INSERT INTO record (name_record)  VALUES (:nameRecordAdd)';
+            $sql = 'INSERT INTO record (name_record)
+                    VALUES (:nameRecordAdd)';
             $paramValues = [
                 ':nameRecordAdd' => $nameRecordAdd,
             ];
@@ -49,12 +54,15 @@
 
         public function deleteRecord($idRecordDelete)
         {
-            $sql = 'DELETE record.*, band_list.*, album_list.*, song_list.* 
-                        FROM record 
-                            LEFT JOIN band_list ON `record`.id = `band_list`.id_record 
-                            LEFT JOIN album_list ON `band_list`.id = `album_list`.id_band 
-                            LEFT JOIN song_list ON `album_list`.id = `song_list`.id_album
-                        WHERE `record`.id = :idRecordDelete';
+            $sql = 'DELETE  record.*,
+                            band_list.*,
+                            album_list.*,
+                            song_list.*
+                    FROM record
+                        LEFT JOIN band_list ON record.id = band_list.id_record
+                        LEFT JOIN album_list ON band_list.id = album_list.id_band
+                        LEFT JOIN song_list ON album_list.id = song_list.id_album
+                    WHERE `record`.id = :idRecordDelete';
             $paramValues = [
                 ':idRecordDelete' => $idRecordDelete,
             ];
@@ -65,7 +73,9 @@
 
         public function checkRecordForUpdate($nameRecord, $idRecord)
         {
-            $sql = 'SELECT * FROM record WHERE name_record = :nameRecord AND id != :idRecord';
+            $sql = 'SELECT * 
+                    FROM record 
+                    WHERE name_record = :nameRecord AND id != :idRecord';
             $paramValues = [
                 ':nameRecord' => $nameRecord,
                 ':idRecord' => $idRecord,
@@ -80,7 +90,9 @@
 
         public function updateRecord($nameRecordUpdated, $idRecord)
         {
-            $sql = 'UPDATE record SET name_record = :nameRecordUpdated WHERE id = :idRecord';
+            $sql = 'UPDATE record 
+                    SET name_record = :nameRecordUpdated 
+                    WHERE id = :idRecord';
             $paramValues = [
                 ':nameRecordUpdated' => $nameRecordUpdated,
                 ':idRecord' => $idRecord,
