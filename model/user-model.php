@@ -3,9 +3,11 @@
 
     class UserModel extends BaseModel
     {
-        public function getSignin($username, $password)//todo: change name 
+        public function getUser($username, $password)//todo: change name ทำแล้ว
         {
-            $sql = 'SELECT * FROM user WHERE username = :username AND password = :password';
+            $sql = 'SELECT * 
+                    FROM user 
+                    WHERE username = :username AND password = :password';
             $paramValues = [
                 ':username' => $username,
                 ':password' => $password,
@@ -20,7 +22,9 @@
 
         public function getByUsername($username)
         {
-            $sql = 'SELECT * FROM user WHERE username = :username';
+            $sql = 'SELECT * 
+                    FROM user 
+                    WHERE username = :username';
             $paramValues = [
                 ':username' => $username,
             ];
@@ -32,9 +36,10 @@
             return $result;
         }
 
-        public function createUsername($username, $password)//todo: change name
+        public function addUser($username, $password)//todo: change name ทำแล้ว
         {
-            $sql = 'INSERT INTO user (username, password) VALUES (:username, :password)';
+            $sql = 'INSERT INTO user (username, password) 
+                    VALUES (:username, :password)';
             $paramValues = [
                 ':username' => $username,
                 ':password' => $password,

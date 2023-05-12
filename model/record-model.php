@@ -21,7 +21,7 @@
             return $results;
         }
 
-        public function checkRecordForAdd($nameRecord) //todo: change name 
+        public function getRecordByName($nameRecord) //todo: change name ทำแล้ว
         {
             $sql = 'SELECT *
                     FROM record
@@ -71,7 +71,7 @@
             $preparedSql->execute($paramValues);
         }
 
-        public function checkRecordForUpdate($nameRecord, $idRecord)
+        public function getRecordForUpdate($nameRecord, $idRecord)
         {
             $sql = 'SELECT * 
                     FROM record 

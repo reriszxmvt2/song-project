@@ -11,7 +11,7 @@
         $password = $_POST['password'];
 
         $userModel = new UserModel();
-        $result = $userModel->getSignin($username, $password);
+        $result = $userModel->getUser($username, $password);
 
         if ($result) {
             $_SESSION['username'] = $username;

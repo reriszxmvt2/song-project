@@ -12,7 +12,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $userModel = new UserModel(); //todo: refactor object. ทำแล้ว
+        $userModel = new UserModel();
         $result = $userModel->getByUsername($username);
 
         if ($result) {
@@ -20,7 +20,7 @@
         }
 
         if (count($error) == 0) {
-            $userModel->createUsername($username, $password);
+            $userModel->addUser($username, $password);
             $_SESSION['username'] = $username;
             header('location: home-controller.php');
         }

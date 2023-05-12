@@ -1,11 +1,14 @@
 <?php
     include '../model/record-model.php';
 
+    $error = '';
+    $nameRecordAdd = '';
+
     if (isset($_POST['nameRecordAdd'])) { //todo: fix mystery bug;
         $nameRecordAdd = $_POST['nameRecordAdd'];
 
         $recordModel = new RecordModel();
-        $result = $recordModel->checkRecordForAdd($nameRecordAdd);
+        $result = $recordModel->getRecordByName($nameRecordAdd);
 
         if ($result) {
             $error = 'username already exits';

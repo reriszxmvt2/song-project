@@ -3,12 +3,13 @@
 
     $nameRecordUpdate = $_GET['nameRecordUpdate'];
     $idRecordUpdate = $_GET['idRecordUpdate'];
+    $error = '';
 
     if (isset($_POST['userUpdateRecord'])) { //todo: fix mystery bug;
       $nameRecordUpdate = $_POST['userNameRecordUpdate'];
 
       $recordModel = new RecordModel();
-      $result = $recordModel->checkRecordForUpdate($nameRecordUpdate, $idRecordUpdate);
+      $result = $recordModel->getRecordForUpdate($nameRecordUpdate, $idRecordUpdate);
 
       if ($result) {
         $error = 'Record Name Already Exist.';

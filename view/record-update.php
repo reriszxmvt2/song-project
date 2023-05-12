@@ -13,11 +13,9 @@
 
     <form method="post">
         <div>
-            <?php if (isset($error)) : ?>
             <p>
                 <?php echo $error; ?>
             </p>
-            <?php endif; ?>
         </div>
         <div>
             <label> name_record : </label>
