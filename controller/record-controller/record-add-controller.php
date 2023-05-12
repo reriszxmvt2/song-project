@@ -1,5 +1,5 @@
 <?php
-    include '../model/record-model.php';
+    include '../../model/record-model.php';
 
     $error = '';
     $nameRecordAdd = '';
@@ -14,8 +14,8 @@
             $error = 'username already exits';
         } else {
             $recordModel->addRecord($nameRecordAdd);
-            header('location: ./home-controller.php');
+            header('location: ../home-controller.php');
         }
     }
 
-    include '../view/record-add.php';
+    include '../../view/record-add.php';

@@ -11,21 +11,19 @@
             </p>
         </div>
         <form method="post">
-        <button name="logout" value="logout" type="submit"> Logout </button>
+            <button name="logout" value="logout" type="submit"> Logout </button>
+        </form>
             <div>
-                <?php if ($results['result']) : ?>
+                <?php if ($results) : ?>
                     <table>
                         <thead>
                             <tr>
                                 <th>name_record</th>
                                 <th>band_length</th>
-                                <th>delete</th>
-                                <th>update</th>
-                                <th>band_list</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($results['rowInDb'] as $row) : ?> <!-- refactor -->
+                            <?php foreach ($results as $row) : ?> <!-- refactor -->
                                 <tr>
                                     <td>
                                         <p style="text-align: center;">
@@ -38,11 +36,14 @@
                                         </p>
                                     </td>
                                     <td>
-                                        <input type="hidden" name="idRecordDelete" value="<?php echo $row['id']; ?>">
-                                        <button type="submit" name="deleteRecord" value="deleteRecord" style="background : crimson;">delete record</button>
+                                        <form method="post">
+                                            <input type="hidden" name="deleteNameRecord" value="<?php echo $row['name_record']; ?>">
+                                            <button type="submit" name="deleteRecord" 
+                                                    value="deleteRecord" style="background : crimson;">delete record</button>
+                                        </form>
                                     </td>
-                                    <td><!-- refactor for ความสวยงาม ไม่ต้องใช้ onclick-->
-                                        <button style="background : yellow;" onclick="location.href='../controller/record-update-controller.php?idRecordUpdate=<?php echo $row['id']; ?>&nameRecordUpdate=<?php echo $row['name_record']; ?>'" type="button">update record</button>
+                                    <td><!-- refactor for gorgeous / ไม่ต้องใช้ onclick -->
+                                        <button style="background : yellow;" onclick="goToUpdateRecordController()" type="button">update record</button>
                                     </td>
                                     <td>
                                         <button style="background : skyblue;" type="submit" value="bandList" name="bandList">
@@ -55,10 +56,15 @@
                     </table>
                 <?php endif; ?>
             </div>
-        </form>
-        <br>
+        <br />
         <div>
-            <button onclick="location.href='../controller/record-add-controller.php'" type="submit" style="background : lightgreen;"> add record </button>
+            <button onclick="location.href='../controller/record-controller/record-add-controller.php'" 
+                    type="submit" style="background : lightgreen;"> add record </button>
         </div>
     </body>
 </html>
+<script>
+    function goToUpdateRecordController() {
+        location.href='../controller/record-controller/record-update-controller.php?updateRecordId=<?php echo $row['id']; ?>&updateRecordName=<?php echo $row['name_record']; ?>'
+    }
+</script>

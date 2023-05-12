@@ -11,12 +11,7 @@
                     FROM record
                         LEFT JOIN band_list ON record.id = band_list.id_record
                     GROUP BY record.id';
-            $result = $this->connect->query($sql);
-            $rowInDb = $result->fetchAll(); //todo: return แค่ fetchAll ไป
-            $results = [
-                'result' => $result,
-                'rowInDb' => $rowInDb,
-            ];
+            $results = $this->connect->query($sql)->fetchAll();
 
             return $results;
         }
@@ -52,7 +47,7 @@
             return $result;
         }
 
-        public function deleteRecord($idRecordDelete)
+        public function deleteRecord($deleteNameRecord)
         {
             $sql = 'DELETE  record.*,
                             band_list.*,
@@ -62,9 +57,9 @@
                         LEFT JOIN band_list ON record.id = band_list.id_record
                         LEFT JOIN album_list ON band_list.id = album_list.id_band
                         LEFT JOIN song_list ON album_list.id = song_list.id_album
-                    WHERE `record`.id = :idRecordDelete';
+                    WHERE record.name_record = :deleteNameRecord';
             $paramValues = [
-                ':idRecordDelete' => $idRecordDelete,
+                ':deleteNameRecord' => $deleteNameRecord,
             ];
 
             $preparedSql = $this->connect->prepare($sql);

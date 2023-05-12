@@ -6,16 +6,17 @@
         header('location: sign-in-controller.php'); //todo: rectactor ให้ใช้ร่วมกัน
     }
 
-    if (isset($_POST['logout'])) { //todo: refactor.
+    if (isset($_POST['logout'])) { //todo: refactor. 
         session_destroy();
         header('location: ../controller/sign-in-controller.php');
     }
 
     $recordModel = new RecordModel();
+    $deledeleteNameRecord = '';
 
     if (isset($_POST['deleteRecord'])) {
-        $idRecordDelete = $_POST['idRecordDelete'];//todo: deleteRecordId name.
-        $recordModel->deleteRecord($idRecordDelete);
+        $deleteNameRecord = $_POST['deleteNameRecord'];//todo: change name ex. `deleteRecordId`
+        $recordModel->deleteRecord($deleteNameRecord);
     }
 
     $results = $recordModel->getRecordList();

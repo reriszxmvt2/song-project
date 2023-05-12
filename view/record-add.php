@@ -11,14 +11,14 @@
             </p>
         </div>
         <div>
-            <form action="../controller/record-add-controller.php" method="post">
+            <form method="post">
                 <div>
-                    <label for="name_record"> name_record : </label>
+                    <label> name_record : </label>
                     <input type="text" name="nameRecordAdd" value="<?php echo $nameRecordAdd ?>" required>
                 </div>
                 <button type="submit" value="userAddRecord" name="userAddRecord">add record</button>
             </form>
-            <a href="../controller/home-controller.php">cancel</a>
+            <a href="../../controller/home-controller.php">cancel</a>
         </div>
     </body>
 </html>
