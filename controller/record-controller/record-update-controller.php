@@ -1,8 +1,8 @@
 <?php
     include '../../model/record-model.php';
 
-    $updateRecordName = $_GET['updateRecordName'];
-    $updateRecordId = $_GET['updateRecordId'];
+    $updateRecordName = isset($_GET['updateRecordName']) ? $_GET['updateRecordName'] : '';
+    $updateRecordId = isset($_GET['updateRecordId']) ? $_GET['updateRecordId'] : '';
     $error = '';
 
     if (isset($_POST['userUpdateRecord'])) { //todo: fix mystery bug;
