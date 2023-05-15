@@ -3,9 +3,9 @@
 
     class RecordModel extends BaseModel
     {
-        public function getRecordList() //todo: review reccommance. as ต้อง งูcase. bandLength -> total_band.
+        public function getRecordList() //todo: review reccommend. as ต้อง งูcase. bandLength -> total_band. `ทำแล้วจ้าา` ( ^ v ^ )/
         {
-            $sql = 'SELECT
+            $sql = 'SELECT 
                         record.id,
                         record.name_record,
                         COUNT(band_list.id_record) as total_band
@@ -49,33 +49,33 @@
             return $result;
         }
 
-        public function delete($deleteRecordId)
-        {//todo: ลบทีละ table. `ทำแล้วจ้าา` ( ^ v ^ )/
-            $sql = 'DELETE
-                    FROM song_list
-                    WHERE id_album IN (
-                            SELECT id
-                            FROM album_list
-                            WHERE id_band IN (
-                                SELECT id
-                                FROM band_list
-                                WHERE id_record = :deleteRecordId 
-                            )
-                        )';
+        public function delete($deleteRecordId) //todo: ลบทีละ table. `ทำแล้วจ้าา` ( ^ v ^ )/
+        {
             $paramValues = [
                 ':deleteRecordId' => $deleteRecordId,
             ];
 
+            $sql = 'DELETE
+                    FROM song_list
+                    WHERE id_album IN (
+                        SELECT id
+                        FROM album_list
+                        WHERE id_band IN (
+                            SELECT id
+                            FROM band_list
+                            WHERE id_record = :deleteRecordId 
+                        )
+                    )';
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
 
             $sql = 'DELETE 
                     FROM album_list 
                     WHERE id_band IN (  
-                            SELECT id 
-                            FROM band_list 
-                            WHERE id_record = :deleteRecordId
-                        )';
+                        SELECT id 
+                        FROM band_list 
+                        WHERE id_record = :deleteRecordId
+                    )';
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
 
