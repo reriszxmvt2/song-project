@@ -13,58 +13,44 @@
         <form method="post">
             <button name="logout" value="logout" type="submit"> Logout </button>
         </form>
-            <div>
-                <?php if ($results) : ?>
-                    <table>
-                        <thead>
+        <div>
+            <?php if ($results) : ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>name_record</th>
+                            <th>total_band</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($results as $row) : ?>
                             <tr>
-                                <th>name_record</th>
-                                <th>band_length</th>
+                                <td>
+                                    <p style="text-align: center;"><?php echo $row['name_record']; ?></p>
+                                </td>
+                                <td>
+                                    <p style="text-align: center;"><?php echo $row['total_band']; ?></p>
+                                </td>
+                                <td>
+                                    <a href="../record-controller/home-controller.php?deleteRecordId=<?php echo $row['id']; ?>"> delete</a>
+                                    &nbsp
+                                </td>
+                                <td>
+                                    <a href="../record-controller/record-update-controller.php?updateRecordId=<?php echo $row['id']; ?>&updateRecordName=<?php echo $row['name_record']; ?>">update</a>
+                                    &nbsp
+                                </td>
+                                <td>
+                                    <a href="">band_list</a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($results as $row) : ?> <!-- refactor -->
-                                <tr>
-                                    <td>
-                                        <p style="text-align: center;">
-                                            <?php echo $row['name_record']; ?>
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <p style="text-align: center;">
-                                            <?php echo $row['bandLength']; ?>
-                                        </p>
-                                    </td>
-                                    <td>
-                                        <form method="post">
-                                            <input type="hidden" name="deleteNameRecord" value="<?php echo $row['name_record']; ?>">
-                                            <button type="submit" name="deleteRecord" 
-                                                    value="deleteRecord" style="background : crimson;">delete record</button>
-                                        </form>
-                                    </td>
-                                    <td><!-- refactor for gorgeous / ไม่ต้องใช้ onclick -->
-                                        <button style="background : yellow;" onclick="goToUpdateRecordController()" type="button">update record</button>
-                                    </td>
-                                    <td>
-                                        <button style="background : skyblue;" type="submit" value="bandList" name="bandList">
-                                            band slist
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                <?php endif; ?>
-            </div>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </div>
         <br />
         <div>
-            <button onclick="location.href='../controller/record-controller/record-add-controller.php'" 
-                    type="submit" style="background : lightgreen;"> add record </button>
+            <a href="../record-controller/record-add-controller.php">add</a>   
         </div>
     </body>
 </html>
-<script>
-    function goToUpdateRecordController() {
-        location.href='../controller/record-controller/record-update-controller.php?updateRecordId=<?php echo $row['id']; ?>&updateRecordName=<?php echo $row['name_record']; ?>'
-    }
-</script>

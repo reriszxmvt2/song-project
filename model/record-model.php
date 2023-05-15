@@ -3,26 +3,28 @@
 
     class RecordModel extends BaseModel
     {
-        public function getRecordList() //todo: format sql.
+        public function getRecordList() //todo: review reccommance. as ต้อง งูcase. bandLength -> total_band.
         {
-            $sql = 'SELECT  record.id,
-                            record.name_record,
-                            count(band_list.id_record) AS bandLength
+            $sql = 'SELECT
+                        record.id,
+                        record.name_record,
+                        COUNT(band_list.id_record) as total_band
                     FROM record
-                        LEFT JOIN band_list ON record.id = band_list.id_record
+                        LEFT JOIN band_list
+                            ON record.id = band_list.id_record
                     GROUP BY record.id';
             $results = $this->connect->query($sql)->fetchAll();
 
             return $results;
         }
 
-        public function getRecordByName($nameRecord) //todo: change name ทำแล้ว
+        public function getByName($recordName)
         {
             $sql = 'SELECT *
                     FROM record
-                    WHERE name_record = :nameRecord';
+                    WHERE name_record = :recordName';
             $paramValues = [
-                ':nameRecord' => $nameRecord,
+                ':recordName' => $recordName,
             ];
 
             $preparedSql = $this->connect->prepare($sql);
@@ -32,12 +34,12 @@
             return $result;
         }
 
-        public function addRecord($nameRecordAdd)
+        public function add($recordName)
         {
             $sql = 'INSERT INTO record (name_record)
-                    VALUES (:nameRecordAdd)';
+                    VALUES (:recordName)';
             $paramValues = [
-                ':nameRecordAdd' => $nameRecordAdd,
+                ':recordName' => $recordName,
             ];
 
             $preparedSql = $this->connect->prepare($sql);
@@ -47,50 +49,57 @@
             return $result;
         }
 
-        public function deleteRecord($deleteNameRecord)
-        {
-            $sql = 'DELETE  record.*,
-                            band_list.*,
-                            album_list.*,
-                            song_list.*
-                    FROM record
-                        LEFT JOIN band_list ON record.id = band_list.id_record
-                        LEFT JOIN album_list ON band_list.id = album_list.id_band
-                        LEFT JOIN song_list ON album_list.id = song_list.id_album
-                    WHERE record.name_record = :deleteNameRecord';
+        public function delete($deleteRecordId)
+        {//todo: ลบทีละ table. `ทำแล้วจ้าา` ( ^ v ^ )/
+            $sql = 'DELETE
+                    FROM song_list
+                    WHERE id_album IN (
+                            SELECT id
+                            FROM album_list
+                            WHERE id_band IN (
+                                SELECT id
+                                FROM band_list
+                                WHERE id_record = :deleteRecordId 
+                            )
+                        )';
             $paramValues = [
-                ':deleteNameRecord' => $deleteNameRecord,
+                ':deleteRecordId' => $deleteRecordId,
             ];
 
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
-        }
 
-        public function getRecordForUpdate($nameRecord, $idRecord)
-        {
-            $sql = 'SELECT * 
+            $sql = 'DELETE 
+                    FROM album_list 
+                    WHERE id_band IN (  
+                            SELECT id 
+                            FROM band_list 
+                            WHERE id_record = :deleteRecordId
+                        )';
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+
+            $sql = 'DELETE 
+                    FROM band_list 
+                    WHERE id_record = :deleteRecordId';
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+
+            $sql = 'DELETE 
                     FROM record 
-                    WHERE name_record = :nameRecord AND id != :idRecord';
-            $paramValues = [
-                ':nameRecord' => $nameRecord,
-                ':idRecord' => $idRecord,
-            ];
-
+                    WHERE id = :deleteRecordId';
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
-            $result = $preparedSql->fetch();
-
-            return $result;
         }
 
-        public function updateRecord($nameRecordUpdated, $idRecord)
+        public function update($newName, $recordId) //todo: change name -> update. review name ex. newName. `ทำแล้วจ้าา` ( ^ v ^ )/
         {
             $sql = 'UPDATE record 
-                    SET name_record = :nameRecordUpdated 
-                    WHERE id = :idRecord';
+                    SET name_record = :newName 
+                    WHERE id = :recordId';
             $paramValues = [
-                ':nameRecordUpdated' => $nameRecordUpdated,
-                ':idRecord' => $idRecord,
+                ':newName' => $newName,
+                ':recordId' => $recordId,
             ];
 
             $preparedSql = $this->connect->prepare($sql);

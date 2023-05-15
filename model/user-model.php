@@ -36,7 +36,7 @@
             return $result;
         }
 
-        public function addUser($username, $password)//todo: change name ทำแล้ว
+        public function add($username, $password)//todo: change name ทำแล้ว
         {
             $sql = 'INSERT INTO user (username, password) 
                     VALUES (:username, :password)';

@@ -5,7 +5,7 @@
     $error = [];
 
     if (isset($_SESSION['username'])) {
-        header('location: index.php');
+        header('location: record-controller/home-controller.php');
     }
 
     if (isset($_POST['signup'])) {
@@ -20,7 +20,7 @@
         }
 
         if (count($error) == 0) {
-            $userModel->addUser($username, $password);
+            $userModel->add($username, $password);
             $_SESSION['username'] = $username;
             header('location: home-controller.php');
         }

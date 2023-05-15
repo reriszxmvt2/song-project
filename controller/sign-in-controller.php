@@ -3,7 +3,7 @@
     include '../model/user-model.php';
 
     if (isset($_SESSION['username'])) {
-        header('location: index.php');
+        header('location: record-controller/home-controller.php');
     }
 
     if (isset($_POST['signin'])) {
@@ -15,7 +15,7 @@
 
         if ($result) {
             $_SESSION['username'] = $username;
-            header('location: home-controller.php');
+            header('location: ./record-controller/home-controller.php');
         } else {
             $error = 'username or password wrong';
         }

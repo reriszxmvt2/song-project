@@ -8,13 +8,13 @@
         $nameRecordAdd = $_POST['nameRecordAdd'];
 
         $recordModel = new RecordModel();
-        $result = $recordModel->getRecordByName($nameRecordAdd);
+        $result = $recordModel->getByName($nameRecordAdd);
 
         if ($result) {
             $error = 'username already exits';
         } else {
-            $recordModel->addRecord($nameRecordAdd);
-            header('location: ../home-controller.php');
+            $recordModel->add($nameRecordAdd);
+            header('location: ../record-controller/home-controller.php');
         }
     }
 
