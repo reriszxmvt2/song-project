@@ -3,6 +3,7 @@
 
     $error = '';
     $nameRecordAdd = '';
+    $cancel = '../record-controller/home-controller.php';
 
     if (isset($_POST['nameRecordAdd'])) { //todo: fix mystery bug;
         $nameRecordAdd = $_POST['nameRecordAdd'];

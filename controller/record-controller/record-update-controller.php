@@ -4,6 +4,7 @@
     $updateRecordName = isset($_GET['updateRecordName']) ? $_GET['updateRecordName'] : '';
     $updateRecordId = isset($_GET['updateRecordId']) ? $_GET['updateRecordId'] : '';
     $error = '';
+    $cancel = '../record-controller/home-controller.php';
 
     if (isset($_POST['userUpdateRecord'])) { //todo: fix mystery bug;
         $updateRecordName = $_POST['userUpdateRecordName'];
