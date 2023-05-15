@@ -13,7 +13,7 @@
       $recordIdInDb = $result['id'];
 
       if ($result && $updateRecordId != $recordIdInDb) {
-        $error = 'Record Name Already Exist.';
+          $error = 'Record Name Already Exist.';
       } else {
         $recordModel->update($updateRecordName, $updateRecordId);
         header('location: ../record-controller/home-controller.php');
