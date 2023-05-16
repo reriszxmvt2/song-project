@@ -1,11 +1,22 @@
 <?php
-    // function getAlbumList()
-    // {
-    //     $sql = ' SELECT * FROM `album_list` WHERE name_album = :nameAlbumAdd AND id_band = :idBand ';
-    //     $preparedSql = $connect->prepade($sql);
-    //     $preparedSql->execute([
-    //         ':nameAlbumAdd' => $nameAlbumAdd,
-    //         ':idBand' => $idBand
-    //     ]);
-    //     $album = $preparedSql->fetch();
-    // };
+    // include 'base-model.php';
+
+    class AlbumListModel extends BaseModel
+    {
+        function delete($deleteRecordId)
+        {
+            $sql = 'DELETE 
+                    FROM album_list 
+                    WHERE id_band IN (  
+                        SELECT id 
+                        FROM band_list 
+                        WHERE id_record = :deleteRecordId
+                    )';
+            $paramValues = [
+                ':deleteRecordId' => $deleteRecordId,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+        }
+    }

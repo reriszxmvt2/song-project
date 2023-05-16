@@ -51,45 +51,45 @@
 
         public function delete($deleteRecordId) //todo: ลบทีละ table. `ทำแล้วจ้าา` ( ^ v ^ )/
         {
-            $paramValues = [
-                ':deleteRecordId' => $deleteRecordId,
-            ];
-
-            $sql = 'DELETE
-                    FROM song_list
-                    WHERE id_album IN (
-                        SELECT id
-                        FROM album_list
-                        WHERE id_band IN (
-                            SELECT id
-                            FROM band_list
-                            WHERE id_record = :deleteRecordId 
-                        )
-                    )';
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-
-            $sql = 'DELETE 
-                    FROM album_list 
-                    WHERE id_band IN (  
-                        SELECT id 
-                        FROM band_list 
-                        WHERE id_record = :deleteRecordId
-                    )';
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-
-            $sql = 'DELETE 
-                    FROM band_list 
-                    WHERE id_record = :deleteRecordId';
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-
             $sql = 'DELETE 
                     FROM record 
                     WHERE id = :deleteRecordId';
+            $paramValues = [
+                ':deleteRecordId' => $deleteRecordId,
+            ];
+            
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
+
+            // $sql = 'DELETE
+            //         FROM song_list
+            //         WHERE id_album IN (
+            //             SELECT id
+            //             FROM album_list
+            //             WHERE id_band IN (
+            //                 SELECT id
+            //                 FROM band_list
+            //                 WHERE id_record = :deleteRecordId 
+            //             )
+            //         )';
+            // $preparedSql = $this->connect->prepare($sql);
+            // $preparedSql->execute($paramValues);
+
+            // $sql = 'DELETE 
+            //         FROM album_list 
+            //         WHERE id_band IN (  
+            //             SELECT id 
+            //             FROM band_list 
+            //             WHERE id_record = :deleteRecordId
+            //         )';
+            // $preparedSql = $this->connect->prepare($sql);
+            // $preparedSql->execute($paramValues);
+
+            // $sql = 'DELETE 
+            //         FROM band_list 
+            //         WHERE id_record = :deleteRecordId';
+            // $preparedSql = $this->connect->prepare($sql);
+            // $preparedSql->execute($paramValues);
         }
 
         public function update($newName, $recordId) //todo: change name -> update. review name ex. newName. `ทำแล้วจ้าา` ( ^ v ^ )/
