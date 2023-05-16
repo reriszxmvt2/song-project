@@ -1,7 +1,30 @@
 <?php
-    class BandListModel extends BaseModel
+    include_once 'base-model.php';
+    class BandModel extends BaseModel
     {
-        function delete($deleteRecordId)
+        public function getBandList($recordId)
+        {
+            $sql = 'SELECT 
+                        band.id,
+                        band.name_band,
+                        COUNT(album.id_band) as total_album
+                    FROM band
+                        LEFT JOIN album
+                            ON band.id = album.id_band
+                    WHERE band.id_record = :recordId
+                    GROUP BY band.id';
+            $paramValues = [
+                ':recordId' => $recordId,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+            $results = $preparedSql->fetchAll();
+
+            return $results;
+        }
+
+        public function delete($deleteRecordId)
         {
             $sql = 'DELETE 
                     FROM band_list 

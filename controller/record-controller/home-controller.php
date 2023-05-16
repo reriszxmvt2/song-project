@@ -1,9 +1,14 @@
 <?php
     session_start();
     include '../../model/record-model.php';
-    include '../../model/band-list-model.php';
+    include '../../model/band-model.php';
     include '../../model/album-list-model.php';
     include '../login-status.php';
+
+    if (isset($_POST['logout'])) {
+        session_destroy();
+        header('location: ../sign-in-controller.php');
+    }
 
     $recordModel = new RecordModel(); 
 
@@ -13,7 +18,7 @@
         $albumListModel = new AlbumListModel();
         $albumListModel->delete($deleteRecordId);
 
-        $bandListModel = new BandListModel();
+        $bandListModel = new BandModel();
         $bandListModel->delete($deleteRecordId);
 
         $recordModel->delete($deleteRecordId);
@@ -21,4 +26,4 @@
 
     $results = $recordModel->getRecordList();
 
-    include '../../view/home-view.php';
+    include '../../view/record-view/home-view.php';

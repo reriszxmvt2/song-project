@@ -1,4 +1,5 @@
 <?php
+    include '../../model/base-model.php';
     include '../../model/record-model.php';
     //todo: ส่งแค่ id. ทำแล้วครับผม (^ v ^)/
     $error = '';
@@ -19,7 +20,8 @@
         } else {
           $recordModel->update($updateRecordName, $updateRecordId);
           header('location: ../record-controller/home-controller.php');
+          exit();
         }
     }
 
-    include '../../view/record-update.php';
+    include '../../view/record-view/record-update.php';

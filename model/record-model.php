@@ -1,5 +1,5 @@
 <?php
-    include 'base-model.php';
+    include_once 'base-model.php';
 
     class RecordModel extends BaseModel
     {
@@ -8,10 +8,10 @@
             $sql = 'SELECT 
                         record.id,
                         record.name_record,
-                        COUNT(band_list.id_record) as total_band
+                        COUNT(band.id_record) as total_band
                     FROM record
-                        LEFT JOIN band_list
-                            ON record.id = band_list.id_record
+                        LEFT JOIN band
+                            ON record.id = band.id_record
                     GROUP BY record.id';
             $results = $this->connect->query($sql)->fetchAll();
 

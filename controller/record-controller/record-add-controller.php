@@ -1,4 +1,5 @@
 <?php
+    include '../../model/base-model.php';
     include '../../model/record-model.php';
 
     $error = '';
@@ -15,7 +16,8 @@
         } else {
             $recordModel->add($nameRecordAdd);
             header('location: ../record-controller/home-controller.php');
+            exit();
         }
     }
 
-    include '../../view/record-add.php';
+    include '../../view/record-view/record-add.php';
