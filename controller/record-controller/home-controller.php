@@ -6,7 +6,6 @@
     include '../login-status.php';
 
     $recordModel = new RecordModel();
-    $deledeleteNameRecord = '';
     $addUrl = "../record-controller/record-add-controller.php"; 
 
     if (isset($_GET['deleteRecordId'])) {

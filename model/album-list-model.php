@@ -1,6 +1,4 @@
 <?php
-    // include 'base-model.php';
-
     class AlbumListModel extends BaseModel
     {
         function delete($deleteRecordId)

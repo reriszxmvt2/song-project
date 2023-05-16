@@ -1,5 +1,20 @@
 <?php
-    // include 'base-model.php';
+    class BandListModel extends BaseModel
+    {
+        function delete($deleteRecordId)
+        {
+            $sql = 'DELETE 
+                    FROM band_list 
+                    WHERE id_record = :deleteRecordId';
+            $paramValues = [
+                ':deleteRecordId' => $deleteRecordId,
+            ];
+            
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+        }
+    }
+    
     // function fetchBandList($nameBand, $idRecord, $idBand, $connect)
     // {
     //     $sql = 'SELECT * FROM `band_list` WHERE name_band = :nameBand AND id_record = :idRecord AND id != :idBand ';
@@ -51,18 +66,4 @@
     //     $preparedSql->execute($paramValues);
     // }
 
-    class BandListModel extends BaseModel
-    {
-        function delete($deleteRecordId)
-        {
-            $sql = 'DELETE 
-                    FROM band_list 
-                    WHERE id_record = :deleteRecordId';
-            $paramValues = [
-                ':deleteRecordId' => $deleteRecordId,
-            ];
-            
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-        }
-    }
+    
