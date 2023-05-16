@@ -17,6 +17,7 @@
             </div>
             <button type="submit" name="userUpdateRecord" value="userUpdateRecord">update record</button>
         </form>
-        <a href= <?php echo $cancel ?> >cancel</a><!-- refactor for clean code --> 
+        <?php $cancelUrl = '../record-controller/home-controller.php'; ?>
+        <a href= <?php echo $cancelUrl ?> >cancel</a>
     </body>
 </html>

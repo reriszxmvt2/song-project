@@ -5,16 +5,17 @@
     include '../../model/album-list-model.php';
     include '../login-status.php';
 
-    $recordModel = new RecordModel();
-    $addUrl = "../record-controller/record-add-controller.php"; 
+    $recordModel = new RecordModel(); 
 
     if (isset($_GET['deleteRecordId'])) {
         $deleteRecordId = $_GET['deleteRecordId'];
 
         $albumListModel = new AlbumListModel();
         $albumListModel->delete($deleteRecordId);
+
         $bandListModel = new BandListModel();
         $bandListModel->delete($deleteRecordId);
+
         $recordModel->delete($deleteRecordId);
     }
 

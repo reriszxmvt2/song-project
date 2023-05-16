@@ -75,4 +75,20 @@
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
         }
+
+        public function getNameById($recordId)
+        {
+            $sql = 'SELECT name_record
+                    FROM record
+                    WHERE id = :recordId';
+            $paramValues = [
+                ':recordId' => $recordId,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+            $result = $preparedSql->fetch();
+
+            return $result;
+        }
     }

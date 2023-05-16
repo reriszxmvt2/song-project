@@ -18,7 +18,8 @@
                 </div>
                 <button type="submit" value="userAddRecord" name="userAddRecord">add record</button>
             </form>
-            <a href=<?php echo $cancel ?> >cancel</a><!-- refactor for clean code --> 
+            <?php $cancelUrl = '../record-controller/home-controller.php';  ?>
+            <a href=<?php echo $cancelUrl ?> >cancel</a> 
         </div>
     </body>
 </html>

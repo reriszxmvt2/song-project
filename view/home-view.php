@@ -20,7 +20,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($results as $row) : ?>
+                    <?php foreach ($results as $row) : 
+                        $deleteRecordId = $row['id'];
+                        $deleteUrl = '../record-controller/home-controller.php?deleteRecordId=' . $deleteRecordId;
+
+                        $updateRecordId = $row['id'];
+                        $updateUrl = '../record-controller/record-update-controller.php?updateRecordId=' . $updateRecordId;
+
+                        $addUrl = "../record-controller/record-add-controller.php";
+                    ?> 
                         <tr>
                             <td>
                                 <p style="text-align: center;"><?php echo $row['name_record']; ?></p>
@@ -29,19 +37,10 @@
                                 <p style="text-align: center;"><?php echo $row['total_band']; ?></p>
                             </td>
                             <td>
-                                <?php 
-                                    $deleteRecordId = $row['id'];
-                                    $deleteUrl = '../record-controller/home-controller.php?deleteRecordId=' . $deleteRecordId; 
-                                ?>
                                 <a href="<?php echo $deleteUrl; ?>">delete</a>
                                 &nbsp;
                             </td>
                             <td>
-                                <?php 
-                                    $updateRecordId = $row['id'];
-                                    $updateRecordName = $row['name_record'];
-                                    $updateUrl = '../record-controller/record-update-controller.php?updateRecordId=' . $updateRecordId . '&updateRecordName=' . $updateRecordName; 
-                                ?>
                                 <a href="<?php echo $updateUrl; ?>">update</a>
                                 &nbsp;
                             </td>

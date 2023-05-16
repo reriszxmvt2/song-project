@@ -1,15 +1,16 @@
 <?php
     include '../../model/record-model.php';
-
-    $updateRecordName = isset($_GET['updateRecordName']) ? $_GET['updateRecordName'] : '';
-    $updateRecordId = isset($_GET['updateRecordId']) ? $_GET['updateRecordId'] : '';
+    //todo: ส่งแค่ id. ทำแล้วครับผม (^ v ^)/
     $error = '';
-    $cancel = '../record-controller/home-controller.php';
+    $updateRecordId = isset($_GET['updateRecordId']) ? $_GET['updateRecordId'] : '';
+
+    $recordModel = new RecordModel();
+    $result = $recordModel->getNameById($updateRecordId);
+    $updateRecordName = $result['name_record'];
 
     if (isset($_POST['userUpdateRecord'])) { //todo: fix mystery bug;
         $updateRecordName = $_POST['userUpdateRecordName'];
 
-        $recordModel = new RecordModel();
         $result = $recordModel->getByName($updateRecordName);
         $recordIdInDb = $result['id'];
 
