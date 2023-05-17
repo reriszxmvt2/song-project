@@ -1,7 +1,12 @@
 <?php
-    include '../../model/base-model.php';
+    session_start();
     include '../../model/record-model.php';
-    //todo: ส่งแค่ id. ทำแล้วครับผม (^ v ^)/
+
+    if (empty($_SESSION['username'])) {
+        header('location: ../../controller/sign-in-controller.php');
+        exit();
+    }
+
     $error = '';
     $updateRecordId = isset($_GET['updateRecordId']) ? $_GET['updateRecordId'] : '';
 
@@ -9,7 +14,7 @@
     $result = $recordModel->getNameById($updateRecordId);
     $updateRecordName = $result['name_record'];
 
-    if (isset($_POST['userUpdateRecord'])) { //todo: fix mystery bug;
+    if (isset($_POST['userUpdateRecord'])) {
         $updateRecordName = $_POST['userUpdateRecordName'];
 
         $result = $recordModel->getByName($updateRecordName);

@@ -1,11 +1,16 @@
 <?php
-    include '../../model/base-model.php';
+    session_start();
     include '../../model/record-model.php';
+
+    if (empty($_SESSION['username'])) {
+        header('location: ../../controller/sign-in-controller.php');
+        exit();
+    }
 
     $error = '';
     $nameRecordAdd = '';
 
-    if (isset($_POST['nameRecordAdd'])) { //todo: fix mystery bug;
+    if (isset($_POST['nameRecordAdd'])) {
         $nameRecordAdd = $_POST['nameRecordAdd'];
 
         $recordModel = new RecordModel();

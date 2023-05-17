@@ -16,6 +16,7 @@
         if ($result) {
             $_SESSION['username'] = $username;
             header('location: ./record-controller/home-controller.php');
+            exit();
         } else {
             $error = 'username or password wrong';
         }

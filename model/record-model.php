@@ -3,7 +3,7 @@
 
     class RecordModel extends BaseModel
     {
-        public function getRecordList() //todo: review reccommend. as ต้อง งูcase. bandLength -> total_band. `ทำแล้วจ้าา` ( ^ v ^ )/
+        public function getList() //todo: review reccommend.
         {
             $sql = 'SELECT 
                         record.id,
@@ -44,9 +44,6 @@
 
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
-            $result = $preparedSql->fetch();
-
-            return $result;
         }
 
         public function delete($deleteRecordId) //todo: ลบทีละ table. `ทำแล้วจ้าา` ( ^ v ^ )/

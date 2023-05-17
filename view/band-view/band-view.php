@@ -22,8 +22,8 @@
                     <tbody>
                         <?php foreach ($results as $row) : 
                             // $bandId = $row['id'];
-                            // $deleteUrl = '../band-controller/band-controller.php?deleteBandId=' . $bandId;
-                            // $updateUrl = '../band-controller/record-band-controller.php?updateBandId=' . $bandId;
+                            // $deleteUrl = '../band-controller/band-controller.php?bandId=' . $bandId;
+                            $updateUrl = '../band-controller/band-update-controller.php?updateBandId=' . $bandId;
                             // $albumUrl = '../album-controller/album-controller.php?bandId=' . $bandId;
                         ?> 
                             <tr>
@@ -38,7 +38,7 @@
                                     &nbsp;
                                 </td>
                                 <td>
-                                    <a href="<?php ?>">update</a>
+                                    <a href="<?php echo $updateUrl; ?>">update</a>
                                     &nbsp;
                                 </td>
                                 <td>
@@ -51,7 +51,7 @@
             <?php endif; ?>
         </div>
         <div>
-            <?php $addUrl = ''; ?>
+            <?php $addUrl = '../band-controller/band-add-controller.php?recordId=' . $recordId; ?>
             <a href="<?php echo $addUrl; ?>">add</a>
         </div>
     </body>

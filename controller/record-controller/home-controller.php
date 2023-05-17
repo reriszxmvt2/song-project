@@ -18,12 +18,12 @@
         $albumListModel = new AlbumListModel();
         $albumListModel->delete($deleteRecordId);
 
-        $bandListModel = new BandModel();
-        $bandListModel->delete($deleteRecordId);
+        $bandModel = new BandModel();
+        $bandModel->delete($deleteRecordId);
 
         $recordModel->delete($deleteRecordId);
     }
 
-    $results = $recordModel->getRecordList();
+    $results = $recordModel->getList();
 
-    include '../../view/record-view/home-view.php';
+    include '../../view/record-view/home-view.php'; //todo: เพิ่ม album total ใน record
