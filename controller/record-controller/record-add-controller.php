@@ -1,11 +1,7 @@
 <?php
     session_start();
     include '../../model/record-model.php';
-
-    if (empty($_SESSION['username'])) {
-        header('location: ../../controller/sign-in-controller.php');
-        exit();
-    }
+    include '../login-status.php';
 
     $error = '';
     $nameRecordAdd = '';

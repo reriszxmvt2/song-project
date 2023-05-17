@@ -2,11 +2,11 @@
     session_start();
     include '../model/user-model.php';
 
-    $error = [];
-
     if (isset($_SESSION['username'])) {
         header('location: record-controller/home-controller.php');
     }
+
+    $error = [];
 
     if (isset($_POST['signup'])) {
         $username = $_POST['username'];

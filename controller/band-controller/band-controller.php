@@ -4,21 +4,17 @@
     include '../../model/album-list-model.php';
     include '../login-status.php';
 
-    // if (!isset($_SESSION['username'])) {
-    //     header('location: ../../controller/sign-in-controller.php');
-    // }
-
-    $deleteBandId = '';
     $recordId = $_GET['recordId'];
 
     $bandModel = new BandModel();
 
     if (isset($_GET['deleteBandId'])) {
         $deleteBandId = $_GET['deleteBandId'];
+        echo $deleteBandId;
 
-        $bandModel->deleteByBandIdAndRecordId($deleteBandId ,$recordId);
+        // $bandModel->deleteByBandIdAndRecordId($deleteBandId ,$recordId);
     }
 
-    $results = $bandModel->getBandList($recordId);
+    $results = $bandModel->getList($recordId);
 
     include '../../view/band-view/band-view.php';

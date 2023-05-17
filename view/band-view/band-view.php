@@ -23,7 +23,7 @@
                         <?php foreach ($results as $row) : 
                             // $bandId = $row['id'];
                             // $deleteUrl = '../band-controller/band-controller.php?bandId=' . $bandId;
-                            $updateUrl = '../band-controller/band-update-controller.php?updateBandId=' . $bandId;
+                            // $updateUrl = '../band-controller/band-update-controller.php?updateBandId=' . $bandId;
                             // $albumUrl = '../album-controller/album-controller.php?bandId=' . $bandId;
                         ?> 
                             <tr>

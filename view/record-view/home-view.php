@@ -15,13 +15,20 @@
             <table>
                 <thead>
                     <tr>
-                        <th>name_record</th>
-                        <th>total_band</th>
+                        <th>
+                            <p> name_record </p> 
+                        </th>
+                        <th>
+                            <p> total_band </p>
+                        </th>
+                        <th>
+                            <p> total_album </p>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                        foreach ($results as $row) : // ใช้ {} 
+                        foreach ($results as $row) { // ใช้ {} 
                             $recordId = $row['id']; //clean code
                             $deleteUrl = '../record-controller/home-controller.php?deleteRecordId=' . $recordId;
                             $updateUrl = '../record-controller/record-update-controller.php?updateRecordId=' . $recordId;
@@ -35,6 +42,9 @@
                                 <p style="text-align: center;"><?php echo $row['total_band']; ?></p>
                             </td>
                             <td>
+                                <p style="text-align: center;"><?php echo $row['total_album']; ?></p>
+                            </td>
+                            <td>
                                 <a href="<?php echo $deleteUrl; ?>">delete</a>
                                 &nbsp;
                             </td>
@@ -46,7 +56,7 @@
                                 <a href="<?php echo $bandUrl; ?>">band_list</a>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </tbody>
             </table>
         <?php endif; ?>

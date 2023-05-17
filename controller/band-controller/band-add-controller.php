@@ -1,5 +1,7 @@
 <?php
+    session_start();
     include '../../model/band-model.php';
+    include '../login-status.php';
 
     $error = '';
     $addBandName = '';

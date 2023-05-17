@@ -8,11 +8,15 @@
             $sql = 'SELECT 
                         record.id,
                         record.name_record,
-                        COUNT(band.id_record) as total_band
+                        COUNT(band.id_record) as total_band,
+                        COUNT(album.id_band) as total_album
                     FROM record
                         LEFT JOIN band
                             ON record.id = band.id_record
-                    GROUP BY record.id';
+                        LEFT JOIN album
+                            ON band.id = album.id_band
+                    GROUP BY record.id
+                    ';
             $results = $this->connect->query($sql)->fetchAll();
 
             return $results;
@@ -46,7 +50,7 @@
             $preparedSql->execute($paramValues);
         }
 
-        public function delete($deleteRecordId) //todo: ลบทีละ table. `ทำแล้วจ้าา` ( ^ v ^ )/
+        public function delete($deleteRecordId)
         {
             $sql = 'DELETE 
                     FROM record 
@@ -59,7 +63,7 @@
             $preparedSql->execute($paramValues);
         }
 
-        public function update($newName, $recordId) //todo: change name -> update. review name ex. newName. `ทำแล้วจ้าา` ( ^ v ^ )/
+        public function update($newName, $recordId)
         {
             $sql = 'UPDATE record 
                     SET name_record = :newName 
