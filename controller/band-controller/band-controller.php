@@ -1,18 +1,21 @@
 <?php
     session_start();
     include '../../model/band-model.php';
-    include '../../model/album-list-model.php';
+    include '../../model/album-model.php';
     include '../login-status.php';
 
     $recordId = $_GET['recordId'];
-
+    $bandId = '';
+    
     $bandModel = new BandModel();
 
-    if (isset($_GET['deleteBandId'])) {
-        $deleteBandId = $_GET['deleteBandId'];
-        echo $deleteBandId;
+    if (isset($_GET['bandId'])) {
+        $bandId = $_GET['bandId'];
 
-        // $bandModel->deleteByBandIdAndRecordId($deleteBandId ,$recordId);
+        $albumModel = new AlbumModel();
+        $albumModel->deleteByBandId($bandId);
+
+        $bandModel->delete($bandId);
     }
 
     $results = $bandModel->getList($recordId);

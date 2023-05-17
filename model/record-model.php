@@ -8,14 +8,14 @@
             $sql = 'SELECT 
                         record.id,
                         record.name_record,
-                        COUNT(band.id_record) as total_band,
-                        COUNT(album.id_band) as total_album
+                        COUNT(DISTINCT band.id) as total_band,
+                        COUNT(DISTINCT album.id) as total_album
                     FROM record
                         LEFT JOIN band
                             ON record.id = band.id_record
                         LEFT JOIN album
                             ON band.id = album.id_band
-                    GROUP BY record.id
+                    GROUP BY record.id, record.name_record;
                     ';
             $results = $this->connect->query($sql)->fetchAll();
 

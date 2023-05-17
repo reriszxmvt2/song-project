@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Band Page</title>
+        <title>Album Page</title>
     </head>
     <body>
-        <h1>Band</h1>
+        <h1>
+            <?php ?> Album Page
+        </h1>
         <div>
-            <?php $backUrl = '../record-controller/home-controller.php'; ?>
+            <?php $backUrl = '../band-controller/band-controller.php?recordId=' . $recordId; ?>
             <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
-        <br />
+        <br>
         <div>
             <?php if ($results) : ?>
                 <table>
                     <thead>
                         <tr>
-                            <th>name_band</th>
-                            <th>total_album</th>
+                            <th>name_album</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($results as $row) : 
-                            $bandId = $row['id'];
-                            $deleteUrl = '../band-controller/band-controller.php?bandId=' . $bandId . '&recordId=' . $recordId ;
-                            $updateUrl = '../band-controller/band-update-controller.php?updateBandId=' . $bandId . '&recordId=' . $recordId;
-                            $albumUrl = '../album-controller/album-controller.php?bandId=' . $bandId . '&recordId=' . $recordId;
+                            $albumId = $row['id'];
+                            $deleteUrl = '../album-controller/album-controller.php?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                            $updateUrl = '../album-controller/album-update-controller.php?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
                         ?> 
                             <tr>
                                 <td>
-                                    <p style="text-align: center;"><?php echo $row['name_band']; ?></p>
-                                </td>
-                                <td>
-                                    <p style="text-align: center;"><?php echo $row['total_album']; ?></p>
+                                    <p style="text-align: center;"><?php echo $row['name_album']; ?></p>
                                 </td>
                                 <td>
                                     <a href="<?php echo $deleteUrl; ?>">delete</a>
@@ -41,9 +38,6 @@
                                     <a href="<?php echo $updateUrl; ?>">update</a>
                                     &nbsp;
                                 </td>
-                                <td>
-                                    <a href="<?php echo $albumUrl; ?>">album_list</a>
-                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -51,7 +45,7 @@
             <?php endif; ?>
         </div>
         <div>
-            <?php $addUrl = '../band-controller/band-add-controller.php?recordId=' . $recordId; ?>
+            <?php $addUrl = '../album-controller/album-add-controller.php?recordId=' . $recordId . '&bandId=' . $bandId; ?>
             <a href="<?php echo $addUrl; ?>">add</a>
         </div>
     </body>

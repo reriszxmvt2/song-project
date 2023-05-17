@@ -3,16 +3,63 @@
 
     class BandModel extends BaseModel
     {
-        public function deleteByBandIdAndRecordId($bandId, $recordId)
+        public function update($newName, $bandId)
         {
-            $sql = 'DELETE 
-                    FROM band_list 
+            $sql = 'UPDATE band 
+                    SET name_band = :newName 
+                    WHERE id = :bandId';
+            $paramValues = [
+                ':newName' => $newName,
+                ':bandId' => $bandId,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+        }
+
+        public function getByName($bandName)
+        {
+            $sql = 'SELECT *
+                    FROM band
+                    WHERE name_band = :bandName
+                    ';
+            $paramValues = [
+                ':bandName' => $bandName,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+            $result = $preparedSql->fetch();
+
+            return $result;
+        }
+
+        public function getById($bandId)
+        {
+            $sql = 'SELECT 
+                        name_band
+                    FROM band
                     WHERE id = :bandId
-                        -- AND id_record = :recordId
                     ';
             $paramValues = [
                 ':bandId' => $bandId,
-                ':recordId' => $recordId,
+            ];
+
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+            $result = $preparedSql->fetch();
+
+            return $result;
+        }
+
+        public function delete($bandId)
+        {
+            $sql = 'DELETE 
+                    FROM band 
+                    WHERE id = :bandId
+                    ';
+            $paramValues = [
+                ':bandId' => $bandId,
             ];
             
             $preparedSql = $this->connect->prepare($sql);
@@ -32,7 +79,7 @@
             $preparedSql->execute($paramValues);
         }
 
-        public function getByName($bandName, $recordId)
+        public function getByNameAndRecordId($bandName, $recordId)
         {
             $sql = 'SELECT *
                     FROM band
@@ -73,10 +120,10 @@
             return $results;
         }
 
-        public function delete($recordId)
+        public function deleteByRecordId($recordId)
         {
             $sql = 'DELETE 
-                    FROM band_list 
+                    FROM band 
                     WHERE id_record = :recordId';
             $paramValues = [
                 ':recordId' => $recordId,

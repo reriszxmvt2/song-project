@@ -2,7 +2,7 @@
     session_start();
     include '../../model/record-model.php';
     include '../../model/band-model.php';
-    include '../../model/album-list-model.php';
+    include '../../model/album-model.php';
     include '../login-status.php';
 
     if (isset($_POST['logout'])) {
@@ -15,11 +15,11 @@
     if (isset($_GET['deleteRecordId'])) {
         $deleteRecordId = $_GET['deleteRecordId'];
 
-        $albumListModel = new AlbumListModel();
-        $albumListModel->delete($deleteRecordId);
+        $albumModel = new AlbumModel();
+        $albumModel->deleteByRecordId($deleteRecordId);
 
         $bandModel = new BandModel();
-        $bandModel->delete($deleteRecordId);
+        $bandModel->deleteByRecordId($deleteRecordId);
 
         $recordModel->delete($deleteRecordId);
     }

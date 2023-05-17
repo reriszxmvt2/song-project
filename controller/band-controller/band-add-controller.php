@@ -11,7 +11,7 @@
         $addBandName = $_POST['addBandName'];
 
         $bandModel = new BandModel();
-        $result = $bandModel->getByName($addBandName, $recordId);
+        $result = $bandModel->getByNameAndRecordId($addBandName, $recordId);
 
         if ($result) {
             $error = 'band name already exits.';
