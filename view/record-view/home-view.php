@@ -28,11 +28,11 @@
                 </thead>
                 <tbody>
                     <?php 
-                        foreach ($results as $row) { // ใช้ {} 
-                            $recordId = $row['id']; //clean code
-                            $deleteUrl = '../record-controller/home-controller.php?deleteRecordId=' . $recordId;
-                            $updateUrl = '../record-controller/record-update-controller.php?updateRecordId=' . $recordId;
-                            $bandUrl = '../band-controller/band-controller.php?recordId=' . $recordId;
+                        foreach ($results as $row) {  
+                            $recordId = $row['id'];
+                            $deleteRecordUrl = generateDeleteRecordUrl($recordId);
+                            $updateRecordUrl = generateUpdateRecordUrl($recordId);
+                            $bandListUrl = generateBandListUrl($recordId);
                     ?> 
                         <tr>
                             <td>
@@ -45,15 +45,15 @@
                                 <p style="text-align: center;"><?php echo $row['total_album']; ?></p>
                             </td>
                             <td>
-                                <a href="<?php echo $deleteUrl; ?>">delete</a>
+                                <a href="<?php echo $deleteRecordUrl; ?>">delete</a>
                                 &nbsp;
                             </td>
                             <td>
-                                <a href="<?php echo $updateUrl; ?>">update</a>
+                                <a href="<?php echo $updateRecordUrl; ?>">update</a>
                                 &nbsp;
                             </td>
                             <td>
-                                <a href="<?php echo $bandUrl; ?>">band_list</a>
+                                <a href="<?php echo $bandListUrl; ?>">band_list</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -62,8 +62,8 @@
         <?php endif; ?>
         <br>
         <div>
-            <?php $addUrl = '../record-controller/record-add-controller.php' ?>
-            <a href="<?php echo $addUrl; ?>">add</a>
+            <?php $addRecordUrl = generateAddRecordUrl() ?>
+            <a href="<?php echo $addRecordUrl; ?>">add record</a>
         </div>
     </body>
 </html>

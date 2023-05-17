@@ -2,9 +2,7 @@
     session_start();
     include '../../model/album-model.php';
     include '../login-status.php';
-
-    print_r($_REQUEST);
-
+    
     $error = '';
     $addAlbumName = '';
     $recordId = $_GET['recordId'] ? $_GET['recordId'] : '' ;

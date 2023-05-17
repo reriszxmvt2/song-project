@@ -26,4 +26,20 @@
 
     $results = $recordModel->getList();
 
-    include '../../view/record-view/home-view.php'; //todo: เพิ่ม album total ใน record
+    function generateDeleteRecordUrl($recordId) {
+        return '../record-controller/home-controller.php?deleteRecordId=' . $recordId;
+    }
+    
+    function generateUpdateRecordUrl($recordId) {
+        return '../record-controller/record-update-controller.php?updateRecordId=' . $recordId;
+    }
+    
+    function generateBandListUrl($recordId) {
+        return '../band-controller/band-controller.php?recordId=' . $recordId;
+    }
+
+    function generateAddRecordUrl() {
+        return '../record-controller/record-add-controller.php';
+    }
+
+    include '../../view/record-view/home-view.php';
