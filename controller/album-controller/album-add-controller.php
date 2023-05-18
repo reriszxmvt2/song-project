@@ -1,7 +1,6 @@
 <?php
-    session_start();
+    include '../check-login.php';
     include '../../model/album-model.php';
-    include '../login-status.php';
     
     $error = '';
     $addAlbumName = '';
@@ -10,7 +9,6 @@
 
     if (isset($_POST['addAlbumName'])) {
         $addAlbumName = $_POST['addAlbumName'];
-        echo 'phet';
 
         $albumModel = new AlbumModel();
         $result = $albumModel->getByNameAndBandId($bandId, $addAlbumName);

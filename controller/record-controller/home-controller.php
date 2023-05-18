@@ -1,9 +1,8 @@
 <?php
-    session_start();
+    include '../check-login.php';
     include '../../model/record-model.php';
     include '../../model/band-model.php';
     include '../../model/album-model.php';
-    include '../login-status.php';
 
     if (isset($_POST['logout'])) {
         session_destroy();

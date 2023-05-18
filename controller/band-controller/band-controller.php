@@ -1,8 +1,7 @@
 <?php
-    session_start();
+    include '../check-login.php';
     include '../../model/band-model.php';
     include '../../model/album-model.php';
-    include '../login-status.php';
 
     $recordId = $_GET['recordId'];
     $bandId = '';
@@ -21,7 +20,7 @@
     $results = $bandModel->getList($recordId);
 
     function generateDeleteBandUrl($bandId, $recordId) {
-        return '../band-controller/band-controller.php?bandId=' . $bandId . '&recordId=' . $recordId ;;
+        return '../band-controller/band-controller.php?bandId=' . $bandId . '&recordId=' . $recordId ;
     }
     
     function generateUpdateBandUrl($bandId, $recordId) {

@@ -28,7 +28,7 @@
                 </thead>
                 <tbody>
                     <?php 
-                        foreach ($results as $row) {  
+                        foreach ($results as $row) {  //todo: refactor.
                             $recordId = $row['id'];
                             $deleteRecordUrl = generateDeleteRecordUrl($recordId);
                             $updateRecordUrl = generateUpdateRecordUrl($recordId);

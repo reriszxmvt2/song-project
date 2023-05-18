@@ -3,19 +3,17 @@
 
     class RecordModel extends BaseModel
     {
-        public function getList() //todo: review reccommend.
+        public function getList() //todo: review database.
         {
             $sql = 'SELECT 
                         record.id,
                         record.name_record,
-                        COUNT(DISTINCT band.id) as total_band,
-                        COUNT(DISTINCT album.id) as total_album
+                        COUNT(DISTINCT band.id) AS total_band,
+                        COUNT(DISTINCT album.id) AS total_album
                     FROM record
-                        LEFT JOIN band
-                            ON record.id = band.id_record
-                        LEFT JOIN album
-                            ON band.id = album.id_band
-                    GROUP BY record.id, record.name_record;
+                        LEFT JOIN band ON record.id = band.id_record
+                        LEFT JOIN album ON band.id = album.id_band
+                    GROUP BY record.id
                     ';
             $results = $this->connect->query($sql)->fetchAll();
 

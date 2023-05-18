@@ -1,7 +1,6 @@
 <?php
-    session_start();
+    include '../check-login.php';
     include '../../model/album-model.php';
-    include '../login-status.php';
     
     $recordId = $_GET['recordId'];
     $bandId = $_GET['bandId'];

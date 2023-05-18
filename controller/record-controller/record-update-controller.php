@@ -1,7 +1,6 @@
 <?php
-    session_start();
+    include '../check-login.php';
     include '../../model/record-model.php';
-    include '../login-status.php';
 
     $error = '';
     $updateRecordId = isset($_GET['updateRecordId']) ? $_GET['updateRecordId'] : '';
