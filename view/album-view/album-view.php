@@ -8,8 +8,8 @@
             <?php ?> Album Page
         </h1>
         <div>
-            <?php $backToBandUrl = generateBacktoBandUrl($recordId) ?>
-            <a href="<?php echo $backToBandUrl; ?>"> <= back</a>
+            <?php $backUrl = '../band-controller/band-controller.php?recordId=' . $recordId; ?>
+            <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
         <br>
         <div>
@@ -24,19 +24,19 @@
                         <?php 
                             foreach ($results as $row) {
                                 $albumId = $row['id'];
-                                $deleteAlbumUrl = generateDeleteAlbumUrl($bandId, $recordId, $albumId);
-                                $updateAlbumUrl = generateUpdateAlbumUrl($bandId, $recordId, $albumId);
+                                $deleteUrl = '../album-controller/album-controller.php?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                                $updateUrl = '../album-controller/album-update-controller.php?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
                         ?> 
                             <tr>
                                 <td>
                                     <p style="text-align: center;"><?php echo $row['name_album']; ?></p>
                                 </td>
                                 <td>
-                                    <a href="<?php echo $deleteAlbumUrl; ?>">delete</a>
+                                    <a href="<?php echo $deleteUrl; ?>">delete</a>
                                     &nbsp;
                                 </td>
                                 <td>
-                                    <a href="<?php echo $updateAlbumUrl; ?>">update</a>
+                                    <a href="<?php echo $updateUrl; ?>">update</a>
                                     &nbsp;
                                 </td>
                             </tr>
@@ -46,8 +46,8 @@
             <?php endif; ?>
         </div>
         <div>
-            <?php $addAlbumUrl = generateAddAlbumUrl($recordId, $bandId) ?>
-            <a href="<?php echo $addAlbumUrl; ?>">add album</a>
+            <?php $addUrl = '../album-controller/album-add-controller.php?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+            <a href="<?php echo $addUrl; ?>">add</a>
         </div>
     </body>
 </html>
