@@ -9,7 +9,7 @@
             <p>Hello!! : <?php echo $_SESSION['username']; ?></p>
         </div>
         <form method="post">
-            <button name="logout" value="logout" type="submit">Logout</button>
+            <button name="logout" value="logout" type="submit">Sign out</button>
         </form>
         <?php if ($results) : ?>
             <table>

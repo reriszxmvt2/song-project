@@ -1,9 +1,10 @@
 <?php
     session_start();
     include '../model/user-model.php';
+    include 'path.php';
 
     if (isset($_SESSION['username'])) {
-        header('location: record-controller/home-controller.php');
+        header('location:' . $redirectToHome);
     }
 
     $error = [];
@@ -22,7 +23,7 @@
         if (count($error) == 0) {
             $userModel->add($username, $password);
             $_SESSION['username'] = $username;
-            header('location: home-controller.php');
+            header('location:' . $redirectToHome);
         }
     }
 

@@ -1,9 +1,10 @@
 <?php
     session_start();
     include '../model/user-model.php';
+    include 'path.php';
 
     if (isset($_SESSION['username'])) {
-        header('location: record-controller/home-controller.php');
+        header('location: ' . $redirectToHome);
     }
 
     if (isset($_POST['signin'])) {
@@ -15,7 +16,7 @@
 
         if ($result) {
             $_SESSION['username'] = $username;
-            header('location: ./record-controller/home-controller.php');
+            header('location: ' . $redirectToHome);
             exit();
         } else {
             $error = 'username or password wrong';

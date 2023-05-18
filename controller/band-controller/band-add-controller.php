@@ -16,10 +16,9 @@
             $error = 'band name already exits.';
         } else {
             $bandModel->add($addBandName, $recordId);
-            header('location: ../band-controller/band-controller.php?recordId=' . $recordId);
+            header('location:' . $bandControllerPath . '?recordId=' . $recordId);
             exit();
         }
     }
 
-    include '../../view/path.php';
     include '../../view/band-view/band-add.php';

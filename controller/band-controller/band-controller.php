@@ -19,5 +19,4 @@
 
     $results = $bandModel->getList($recordId);
 
-    include '../../view/path.php';
     include '../../view/band-view/band-view.php';

@@ -11,7 +11,11 @@
             <?php $backUrl = $bandControllerPath . '?recordId=' . $recordId; ?>
             <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
-        <br>
+        <br />
+        <form method="post">
+            <button name="logout" value="logout" type="submit">Sign out</button>
+        </form>
+        <br />
         <div>
             <?php if ($results) : ?>
                 <table>

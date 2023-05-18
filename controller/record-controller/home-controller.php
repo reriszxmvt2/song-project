@@ -4,11 +4,6 @@
     include '../../model/band-model.php';
     include '../../model/album-model.php';
 
-    if (isset($_POST['logout'])) {
-        session_destroy();
-        header('location: ../sign-in-controller.php');
-    }
-
     $recordModel = new RecordModel(); 
 
     if (isset($_GET['deleteRecordId'])) {
@@ -24,7 +19,6 @@
     }
 
     $results = $recordModel->getList();
-    
-    include '../../view/path.php';
+
     include '../../view/record-view/home-view.php';
     

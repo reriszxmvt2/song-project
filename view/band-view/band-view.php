@@ -7,11 +7,14 @@
         <h1>Band</h1>
         <div>
             <?php 
-                $recordControllerPath = '../record-controller/home-controller.php';
                 $backUrl = $recordControllerPath; 
             ?>
             <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
+        <br />
+        <form method="post">
+            <button name="logout" value="logout" type="submit">Sign out</button>
+        </form>
         <br />
         <div>
             <?php if ($results) : ?>

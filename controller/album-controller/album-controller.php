@@ -15,5 +15,4 @@
 
     $results = $albumModel->getByBandId($bandId);
 
-    include '../../view/path.php';
     include '../../view/album-view/album-view.php';
