@@ -27,12 +27,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
                         foreach ($results as $row) {  
                             $recordId = $row['id']; 
-                            $deleteUrl = '../record-controller/home-controller.php?deleteRecordId=' . $recordId;
-                            $updateUrl = '../record-controller/record-update-controller.php?updateRecordId=' . $recordId;
-                            $bandUrl = '../band-controller/band-controller.php?recordId=' . $recordId;
+                            $deleteUrl = $recordControllerPath . '?deleteRecordId=' . $recordId;
+                            $updateUrl = $recordUpdatePath . '?updateRecordId=' . $recordId;
+                            $bandUrl = $bandControllerPath . '?recordId=' . $recordId;
                     ?> 
                         <tr>
                             <td>
@@ -62,8 +62,10 @@
         <?php endif; ?>
         <br>
         <div>
-            <?php $addUrl = '../record-controller/record-add-controller.php' ?>
-            <a href="<?php echo $addUrl; ?>">add</a>
+            <?php
+                $addUrl = $recordAddPath;
+            ?>
+            <a href="<?php echo $addUrl; ?>">add record</a>
         </div>
     </body>
 </html>

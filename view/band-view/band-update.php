@@ -15,7 +15,7 @@
             <button type="submit" value="updateNameBand" name="updateNameBand">update band</button>
         </form>
         <div>
-            <?php $cancelUrl = '../band-controller/band-controller.php?recordId=' . $recordId; ?>
+            <?php $cancelUrl = $bandControllerPath . '?recordId=' . $recordId; ?>
             <a href=<?php echo $cancelUrl ?> >cancel</a> 
         </div>
     </body>

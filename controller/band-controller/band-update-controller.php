@@ -25,4 +25,5 @@
         }
     }
     
+    include '../../view/path.php';
     include '../../view/band-view/band-update.php';

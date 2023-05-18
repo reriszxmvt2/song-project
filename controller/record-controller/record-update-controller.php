@@ -24,4 +24,5 @@
         }
     }
 
+    include '../../view/path.php';
     include '../../view/record-view/record-update.php';

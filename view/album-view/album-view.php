@@ -8,7 +8,7 @@
             <?php ?> Album Page
         </h1>
         <div>
-            <?php $backUrl = '../band-controller/band-controller.php?recordId=' . $recordId; ?>
+            <?php $backUrl = $bandControllerPath . '?recordId=' . $recordId; ?>
             <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
         <br>
@@ -24,8 +24,8 @@
                         <?php 
                             foreach ($results as $row) {
                                 $albumId = $row['id'];
-                                $deleteUrl = '../album-controller/album-controller.php?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
-                                $updateUrl = '../album-controller/album-update-controller.php?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                                $deleteUrl = $albumControllerPath . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                                $updateUrl = $albumUpdatePath . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
                         ?> 
                             <tr>
                                 <td>
@@ -46,8 +46,8 @@
             <?php endif; ?>
         </div>
         <div>
-            <?php $addUrl = '../album-controller/album-add-controller.php?recordId=' . $recordId . '&bandId=' . $bandId; ?>
-            <a href="<?php echo $addUrl; ?>">add</a>
+            <?php $addUrl = $albumAddPath . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+            <a href="<?php echo $addUrl; ?>">add album</a>
         </div>
     </body>
 </html>

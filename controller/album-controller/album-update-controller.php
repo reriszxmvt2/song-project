@@ -26,4 +26,5 @@
         }
     }
 
+    include '../../view/path.php';
     include '../../view/album-view/album-update.php';

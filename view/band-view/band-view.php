@@ -6,7 +6,10 @@
     <body>
         <h1>Band</h1>
         <div>
-            <?php $backUrl = '../record-controller/home-controller.php'; ?>
+            <?php 
+                $recordControllerPath = '../record-controller/home-controller.php';
+                $backUrl = $recordControllerPath; 
+            ?>
             <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
         <br />
@@ -23,9 +26,9 @@
                         <?php 
                             foreach ($results as $row) {
                                 $bandId = $row['id'];
-                                $deleteUrl = '../band-controller/band-controller.php?bandId=' . $bandId . '&recordId=' . $recordId ;
-                                $updateUrl = '../band-controller/band-update-controller.php?updateBandId=' . $bandId . '&recordId=' . $recordId;
-                                $albumUrl = '../album-controller/album-controller.php?bandId=' . $bandId . '&recordId=' . $recordId;
+                                $deleteUrl = $bandControllerPath . '?bandId=' . $bandId . '&recordId=' . $recordId ;
+                                $updateUrl =  $bandUpdatePath . '?updateBandId=' . $bandId . '&recordId=' . $recordId;
+                                $albumUrl =  $albumControllerPath . '?bandId=' . $bandId . '&recordId=' . $recordId; 
                         ?> 
                             <tr>
                                 <td>
@@ -52,8 +55,10 @@
             <?php endif; ?>
         </div>
         <div>
-            <?php $addUrl = '../band-controller/band-add-controller.php?recordId=' . $recordId; ?>
-            <a href="<?php echo $addUrl; ?>">add</a>
+            <?php 
+                $addUrl = $bandAppPath .'?recordId=' . $recordId; 
+            ?>
+            <a href="<?php echo $addUrl; ?>">add band</a>
         </div>
     </body>
 </html>

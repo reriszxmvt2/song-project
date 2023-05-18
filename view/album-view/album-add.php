@@ -22,7 +22,7 @@
             </div>
             <br />
             <div>
-                <?php $cancelUrl = '../album-controller/album-controller.php?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+                <?php $cancelUrl = $albumControllerPath . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
                 <a href=<?php echo $cancelUrl ?> >cancel</a> 
             </div>
         </div>

@@ -18,7 +18,7 @@
                 </div>
                 <button type="submit" value="userAddRecord" name="userAddRecord">add record</button>
             </form>
-            <?php $cancelUrl = '../record-controller/home-controller.php';  ?>
+            <?php $cancelUrl = $recordControllerPath  ?>
             <a href=<?php echo $cancelUrl ?> >cancel</a> 
         </div>
     </body>
