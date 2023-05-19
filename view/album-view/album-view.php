@@ -1,4 +1,3 @@
-<?php include '../../view/path.php'; ?>
 <?php
     define('ALBUMCONTROLLER','../album-controller/');
     define('ALBUMPATH',[
