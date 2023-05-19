@@ -18,23 +18,6 @@
             $preparedSql->execute($paramValues);
         }
 
-        public function getByName($albumName)
-        {
-            $sql = 'SELECT *
-                    FROM album
-                    WHERE name_album = :albumName
-                    ';
-            $paramValues = [
-                ':albumName' => $albumName,
-            ];
-
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-            $result = $preparedSql->fetch();
-
-            return $result;
-        }
-
         public function getById($albumId)
         {
             $sql = 'SELECT 

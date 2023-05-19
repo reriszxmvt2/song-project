@@ -17,6 +17,6 @@
         $bandModel->delete($bandId);
     }
 
-    $results = $bandModel->getList();
+    $results = $bandModel->getList($recordId);
 
     include '../../view/band-view/band-view.php';

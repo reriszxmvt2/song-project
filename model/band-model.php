@@ -100,7 +100,7 @@
             return $result;
         }
 
-        public function getList()
+        public function getList($recordId)
         {
             $sql = 'SELECT 
                         band.id,
@@ -108,9 +108,16 @@
                         COUNT(album.id_band) as total_album
                     FROM band
                         LEFT JOIN album ON band.id = album.id_band
-                    GROUP BY band.id
+                    WHERE band.id_record = :recordId
+                    GROUP BY band.id;
             ';
-            $results = $this->connect->query($sql)->fetchAll();
+            $paramValues = [
+                ':recordId' => $recordId,
+            ];
+            
+            $preparedSql = $this->connect->prepare($sql);
+            $preparedSql->execute($paramValues);
+            $results = $preparedSql->fetchAll();
 
             return $results;
         }

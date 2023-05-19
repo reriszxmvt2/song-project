@@ -14,7 +14,7 @@
     if (isset($_POST['updateNameAlbum'])) {
         $nameAlbum = $_POST['nameAlbum'];
 
-        $results = $albumModel->getByName($nameAlbum);
+        $results = $albumModel->getByNameAndBandId($bandId, $nameAlbum);
         $albumIdInDb = $results['id'];
 
         if ($results && $albumId != $albumIdInDb) {
