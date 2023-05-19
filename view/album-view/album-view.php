@@ -1,4 +1,14 @@
 <?php include '../../view/path.php'; ?>
+<?php
+    define('ALBUMCONTROLLER','../album-controller/');
+    define('ALBUMPATH',[
+        'controller' => 'album-controller.php',
+        'add' => 'album-add-controller.php',
+        'update' => 'album-update-controller.php',
+    ]);
+
+    define('BANDCONTROLLER','../band-controller/band-controller.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +19,7 @@
             <?php ?> Album Page
         </h1>
         <div>
-            <?php $backUrl = $bandControllerPath . '?recordId=' . $recordId; ?>
+            <?php $backUrl = BANDCONTROLLER . '?recordId=' . $recordId; ?>
             <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
         <br />
@@ -29,8 +39,8 @@
                         <?php 
                             foreach ($results as $row) {
                                 $albumId = $row['id'];
-                                $deleteUrl = $albumControllerPath . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
-                                $updateUrl = $albumUpdatePath . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                                $deleteUrl = ALBUMCONTROLLER . ALBUMPATH['controller'] . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                                $updateUrl = ALBUMCONTROLLER . ALBUMPATH['update'] . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
                         ?> 
                             <tr>
                                 <td>
@@ -51,7 +61,7 @@
             <?php endif; ?>
         </div>
         <div>
-            <?php $addUrl = $albumAddPath . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+            <?php $addUrl = ALBUMCONTROLLER . ALBUMPATH['add'] . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
             <a href="<?php echo $addUrl; ?>">add album</a>
         </div>
     </body>

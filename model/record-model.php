@@ -9,12 +9,12 @@
                         record.id,
                         record.name_record,
                         COUNT(DISTINCT band.id) AS total_band,
-                        COUNT(album.id) AS total_album
+                        COUNT(DISTINCT album.id) AS total_album
                     FROM record
                         LEFT JOIN band ON record.id = band.id_record
-                        LEFT JOIN album ON band.id = album.id_band
+                        LEFT JOIN album ON record.id = album.id_record
                     GROUP BY record.id
-                    ';
+            ';
             $results = $this->connect->query($sql)->fetchAll();
 
             return $results;
@@ -24,7 +24,8 @@
         {
             $sql = 'SELECT *
                     FROM record
-                    WHERE name_record = :recordName';
+                    WHERE name_record = :recordName
+            ';
             $paramValues = [
                 ':recordName' => $recordName,
             ];
@@ -39,7 +40,8 @@
         public function add($recordName)
         {
             $sql = 'INSERT INTO record (name_record)
-                    VALUES (:recordName)';
+                    VALUES (:recordName)
+            ';
             $paramValues = [
                 ':recordName' => $recordName,
             ];
@@ -52,7 +54,8 @@
         {
             $sql = 'DELETE 
                     FROM record 
-                    WHERE id = :deleteRecordId';
+                    WHERE id = :deleteRecordId
+            ';
             $paramValues = [
                 ':deleteRecordId' => $deleteRecordId,
             ];
@@ -65,7 +68,8 @@
         {
             $sql = 'UPDATE record 
                     SET name_record = :newName 
-                    WHERE id = :recordId';
+                    WHERE id = :recordId
+            ';
             $paramValues = [
                 ':newName' => $newName,
                 ':recordId' => $recordId,
@@ -79,7 +83,8 @@
         {
             $sql = 'SELECT name_record
                     FROM record
-                    WHERE id = :recordId';
+                    WHERE id = :recordId
+            ';
             $paramValues = [
                 ':recordId' => $recordId,
             ];

@@ -1,7 +1,6 @@
 <?php
     session_start();
     include '../model/user-model.php';
-    include 'path.php';
 
     if (isset($_SESSION['username'])) {
         header('location: record-controller/home-controller.php');

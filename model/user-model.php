@@ -7,7 +7,8 @@
         {
             $sql = 'SELECT * 
                     FROM user 
-                    WHERE username = :username AND password = :password';
+                    WHERE username = :username AND password = :password
+            ';
             $paramValues = [
                 ':username' => $username,
                 ':password' => $password,
@@ -24,7 +25,8 @@
         {
             $sql = 'SELECT * 
                     FROM user 
-                    WHERE username = :username';
+                    WHERE username = :username
+            ';
             $paramValues = [
                 ':username' => $username,
             ];
@@ -39,7 +41,8 @@
         public function add($username, $password)//todo: change name ทำแล้ว
         {
             $sql = 'INSERT INTO user (username, password) 
-                    VALUES (:username, :password)';
+                    VALUES (:username, :password)
+            ';
             $paramValues = [
                 ':username' => $username,
                 ':password' => $password,

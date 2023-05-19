@@ -1,4 +1,6 @@
-<?php include '../../view/path.php'; ?>
+<?php
+    define('BANDCONTROLLER','../band-controller/band-controller.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,7 +25,7 @@
             </div>
             <br />
             <div>
-                <?php $cancelUrl = $bandControllerPath . '?recordId=' . $recordId; ?>
+                <?php $cancelUrl = BANDCONTROLLER . '?recordId=' . $recordId; ?>
                 <a href=<?php echo $cancelUrl ?> >cancel</a> 
             </div>
         </div>

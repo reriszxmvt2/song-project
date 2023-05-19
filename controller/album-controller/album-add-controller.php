@@ -16,7 +16,7 @@
         if ($result) {
             $error = 'album name already exits.';
         } else {
-            $albumModel->add($addAlbumName, $bandId);
+            $albumModel->add($addAlbumName, $bandId, $recordId);
             header('location: ../album-controller/album-controller.php?recordId=' . $recordId . '&bandId=' . $bandId);
             exit();
         }

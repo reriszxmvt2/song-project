@@ -7,7 +7,8 @@
         {
             $sql = 'UPDATE album 
                     SET name_album = :newName 
-                    WHERE id = :albumId';
+                    WHERE id = :albumId
+            ';
             $paramValues = [
                 ':newName' => $newName,
                 ':albumId' => $albumId,
@@ -63,13 +64,14 @@
             $preparedSql = $this->connect->prepare($sql);
             $preparedSql->execute($paramValues);
         }
-        public function add($albumName, $bandId)
+        public function add($albumName, $bandId, $recordId)
         {
-            $sql = 'INSERT INTO album (name_album,id_band)
-                    VALUES (:albumName,:bandId)';
+            $sql = 'INSERT INTO album (name_album,id_band,id_record)
+                    VALUES (:albumName, :bandId, :recordId)';
             $paramValues = [
                 ':albumName' => $albumName,
                 ':bandId' => $bandId,
+                ':recordId' => $recordId,
             ];
 
             $preparedSql = $this->connect->prepare($sql);
@@ -116,11 +118,8 @@
         {
             $sql = 'DELETE
                     FROM album
-                    WHERE id_band IN ( 
-                        SELECT id
-                        FROM band
-                        WHERE id = :bandId
-                    )';
+                    WHERE id_band = :bandId
+            ';
             $paramValues = [
                 ':bandId' => $bandId,
             ];
@@ -133,11 +132,8 @@
         {
             $sql = 'DELETE 
                     FROM album
-                    WHERE id_band IN (  
-                        SELECT id 
-                        FROM band 
-                        WHERE id_record = :deleteRecordId
-                    )';
+                    WHERE id_record = :deleteRecordId
+            ';
             $paramValues = [
                 ':deleteRecordId' => $deleteRecordId,
             ];

@@ -1,4 +1,13 @@
-<?php include '../../view/path.php'; ?>
+<?php 
+    define('RECORDCONTROLLER','../record-controller/');
+    define('RECORDPATH',[
+        'controller' => 'home-controller.php',
+        'add' => 'record-add-controller.php',
+        'update' => 'record-update-controller.php',
+    ]);
+
+    define('BANDCONTROLLER','../band-controller/band-controller.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,13 +39,13 @@
                 <tbody>
                     <?php
                         foreach ($results as $row) {  
-                            $recordId = $row['id']; 
-                            $deleteUrl = $recordControllerPath . '?deleteRecordId=' . $recordId;
-                            $updateUrl = $recordUpdatePath . '?updateRecordId=' . $recordId;
-                            $bandUrl = $bandControllerPath . '?recordId=' . $recordId;
+                            $recordId = $row['id'];
+                            $deleteUrl = RECORDCONTROLLER . RECORDPATH['controller'] . '?deleteRecordId=' . $recordId;
+                            $updateUrl = RECORDCONTROLLER . RECORDPATH['update'] . '?updateRecordId=' . $recordId;
+                            $bandUrl = BANDCONTROLLER . '?recordId=' . $recordId;
                     ?> 
                         <tr>
-                            <td>
+                            <td> <!--review short tag -->
                                 <p style="text-align: center;"><?php echo $row['name_record']; ?></p>
                             </td>
                             <td>
@@ -64,7 +73,7 @@
         <br>
         <div>
             <?php
-                $addUrl = $recordAddPath;
+                $addUrl = RECORDCONTROLLER . RECORDPATH['add'];
             ?>
             <a href="<?php echo $addUrl; ?>">add record</a>
         </div>

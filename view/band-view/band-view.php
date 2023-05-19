@@ -1,4 +1,14 @@
-<?php include '../../view/path.php'; ?>
+<?php
+    define('BANDCONTROLLER','../band-controller/');
+    define('BANDPATH',[
+        'controller' => 'band-controller.php',
+        'add' => 'band-add-controller.php',
+        'update' => 'band-update-controller.php',
+    ]);
+
+    define('RECORDCONTROLLER','../record-controller/home-controller.php');
+    define('ALBUMCONTROLLER','../album-controller/album-controller.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,7 +18,7 @@
         <h1>Band</h1>
         <div>
             <?php 
-                $backUrl = $recordControllerPath; 
+                $backUrl = RECORDCONTROLLER; 
             ?>
             <a href="<?php echo $backUrl; ?>"> <= back</a>
         </div>
@@ -30,9 +40,9 @@
                         <?php 
                             foreach ($results as $row) {
                                 $bandId = $row['id'];
-                                $deleteUrl = $bandControllerPath . '?bandId=' . $bandId . '&recordId=' . $recordId ;
-                                $updateUrl =  $bandUpdatePath . '?updateBandId=' . $bandId . '&recordId=' . $recordId;
-                                $albumUrl =  $albumControllerPath . '?bandId=' . $bandId . '&recordId=' . $recordId; 
+                                $deleteUrl = BANDCONTROLLER . BANDPATH['controller'] . '?bandId=' . $bandId . '&recordId=' . $recordId ;
+                                $updateUrl =  BANDCONTROLLER . BANDPATH['update'] . '?updateBandId=' . $bandId . '&recordId=' . $recordId;
+                                $albumUrl =  ALBUMCONTROLLER . '?bandId=' . $bandId . '&recordId=' . $recordId; 
                         ?> 
                             <tr>
                                 <td>
@@ -60,7 +70,7 @@
         </div>
         <div>
             <?php 
-                $addUrl = $bandAppPath .'?recordId=' . $recordId; 
+                $addUrl = BANDCONTROLLER . BANDPATH['add'] .'?recordId=' . $recordId; 
             ?>
             <a href="<?php echo $addUrl; ?>">add band</a>
         </div>

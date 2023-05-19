@@ -1,4 +1,6 @@
-<?php include '../../view/path.php'; ?>
+<?php
+    define('RECORDCONTROLLER','../record-controller/home-controller.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,7 +21,7 @@
                 </div>
                 <button type="submit" value="userAddRecord" name="userAddRecord">add record</button>
             </form>
-            <?php $cancelUrl = $recordControllerPath  ?>
+            <?php $cancelUrl = RECORDCONTROLLER  ?>
             <a href=<?php echo $cancelUrl ?> >cancel</a> 
         </div>
     </body>

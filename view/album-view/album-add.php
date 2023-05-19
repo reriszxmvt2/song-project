@@ -1,4 +1,6 @@
-<?php include '../../view/path.php'; ?>
+<?php
+    define('ALBUMCONTROLLER','../album-controller/album-controller.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,7 +25,7 @@
             </div>
             <br />
             <div>
-                <?php $cancelUrl = $albumControllerPath . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+                <?php $cancelUrl = ALBUMCONTROLLER . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
                 <a href=<?php echo $cancelUrl ?> >cancel</a> 
             </div>
         </div>

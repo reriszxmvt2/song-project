@@ -1,13 +1,16 @@
 <?php
+    $recordController = '../record-controller/';
+    $bandController = '../band-controller/';
+    $albumController = '../album-controller/'; //todo: review define in php.
         // controller
-    $recordControllerPath = '../record-controller/home-controller.php';
-    $bandControllerPath = '../band-controller/band-controller.php';
-    $albumControllerPath = '../album-controller/album-controller.php';
+    $recordControllerPath = $recordController . 'home-controller.php';
+    $bandControllerPath = $bandController . 'band-controller.php';
+    $albumControllerPath = $albumController . 'album-controller.php';
         // add
-    $recordAddPath = '../record-controller/record-add-controller.php';
-    $bandAppPath = '../band-controller/band-add-controller.php';
-    $albumAddPath = '../album-controller/album-add-controller.php';
+    $recordAddPath = $recordController . 'record-add-controller.php';
+    $bandAppPath = $bandController . 'band-add-controller.php';
+    $albumAddPath = $albumController . 'album-add-controller.php';
         // update
-    $recordUpdatePath = '../record-controller/record-update-controller.php';
-    $bandUpdatePath = '../band-controller/band-update-controller.php';
-    $albumUpdatePath = '../album-controller/album-update-controller.php';
+    $recordUpdatePath = $recordController . 'record-update-controller.php';
+    $bandUpdatePath = $bandController . 'band-update-controller.php';
+    $albumUpdatePath = $albumController . 'album-update-controller.php'; 

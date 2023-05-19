@@ -7,7 +7,8 @@
         {
             $sql = 'UPDATE band 
                     SET name_band = :newName 
-                    WHERE id = :bandId';
+                    WHERE id = :bandId
+            ';
             $paramValues = [
                 ':newName' => $newName,
                 ':bandId' => $bandId,
@@ -22,7 +23,7 @@
             $sql = 'SELECT *
                     FROM band
                     WHERE name_band = :bandName
-                    ';
+            ';
             $paramValues = [
                 ':bandName' => $bandName,
             ];
@@ -40,7 +41,7 @@
                         name_band
                     FROM band
                     WHERE id = :bandId
-                    ';
+            ';
             $paramValues = [
                 ':bandId' => $bandId,
             ];
@@ -57,7 +58,7 @@
             $sql = 'DELETE 
                     FROM band 
                     WHERE id = :bandId
-                    ';
+            ';
             $paramValues = [
                 ':bandId' => $bandId,
             ];
@@ -69,7 +70,8 @@
         public function add($bandName, $recordId)
         {
             $sql = 'INSERT INTO band (name_band,id_record)
-                    VALUES (:bandName,:recordId)';
+                    VALUES (:bandName,:recordId)
+            ';
             $paramValues = [
                 ':bandName' => $bandName,
                 ':recordId' => $recordId,
@@ -85,7 +87,7 @@
                     FROM band
                     WHERE name_band = :bandName
                         AND id_record = :recordId
-                    ';
+            ';
             $paramValues = [
                 ':bandName' => $bandName,
                 ':recordId' => $recordId,
@@ -98,7 +100,7 @@
             return $result;
         }
 
-        public function getList($recordId)
+        public function getList()
         {
             $sql = 'SELECT 
                         band.id,
@@ -106,15 +108,9 @@
                         COUNT(album.id_band) as total_album
                     FROM band
                         LEFT JOIN album ON band.id = album.id_band
-                    WHERE band.id_record = :recordId
-                    GROUP BY band.id';
-            $paramValues = [
-                ':recordId' => $recordId,
-            ];
-
-            $preparedSql = $this->connect->prepare($sql);
-            $preparedSql->execute($paramValues);
-            $results = $preparedSql->fetchAll();
+                    GROUP BY band.id
+            ';
+            $results = $this->connect->query($sql)->fetchAll();
 
             return $results;
         }
@@ -123,7 +119,8 @@
         {
             $sql = 'DELETE 
                     FROM band 
-                    WHERE id_record = :recordId';
+                    WHERE id_record = :recordId
+            ';
             $paramValues = [
                 ':recordId' => $recordId,
             ];
