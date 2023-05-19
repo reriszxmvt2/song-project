@@ -20,7 +20,7 @@
             $error = 'Band Name Already Exist.';
         } else {
             $bandModel->update($nameBand, $bandId);
-            header('location:' . $bandControllerPath . '?bandId ='. $bandId . '&recordId=' . $recordId );
+            header('location: ../band-controller/band-controller.php?bandId ='. $bandId . '&recordId=' . $recordId );
             exit();
         }
     }

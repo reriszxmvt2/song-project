@@ -21,7 +21,7 @@
             $error = 'Album Name Already Exist.';
         } else {
             $albumModel->update($nameAlbum, $albumId);
-            header('location:' . $albumControllerPath . '?recordId=' . $recordId . '&bandId=' . $bandId);
+            header('location: ../album-controller/album-controller.php?recordId=' . $recordId . '&bandId=' . $bandId);
             exit();
         }
     }

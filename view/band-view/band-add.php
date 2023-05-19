@@ -1,3 +1,4 @@
+<?php include '../../view/path.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

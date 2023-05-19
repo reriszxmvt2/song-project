@@ -1,8 +1,4 @@
 <?php
-        // sign out
-    $redirectToSignin = '../sign-in-controller.php';
-        // sign in & sign up
-    $redirectToHome = 'record-controller/home-controller.php';
         // controller
     $recordControllerPath = '../record-controller/home-controller.php';
     $bandControllerPath = '../band-controller/band-controller.php';

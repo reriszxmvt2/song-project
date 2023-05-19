@@ -19,7 +19,7 @@
             $error = 'Record Name Already Exist.';
         } else {
           $recordModel->update($updateRecordName, $updateRecordId);
-          header('location:' . $recordControllerPath);
+          header('location: ../record-controller/home-controller.php');
           exit();
         }
     }

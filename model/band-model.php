@@ -105,8 +105,7 @@
                         band.name_band,
                         COUNT(album.id_band) as total_album
                     FROM band
-                        LEFT JOIN album
-                            ON band.id = album.id_band
+                        LEFT JOIN album ON band.id = album.id_band
                     WHERE band.id_record = :recordId
                     GROUP BY band.id';
             $paramValues = [

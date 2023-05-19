@@ -17,10 +17,9 @@
             $error = 'album name already exits.';
         } else {
             $albumModel->add($addAlbumName, $bandId);
-            header('location:' . $albumControllerPath . '?recordId=' . $recordId . '&bandId=' . $bandId);
+            header('location: ../album-controller/album-controller.php?recordId=' . $recordId . '&bandId=' . $bandId);
             exit();
         }
     }
 
-   
     include '../../view/album-view/album-add.php';

@@ -4,7 +4,7 @@
     include 'path.php';
 
     if (isset($_SESSION['username'])) {
-        header('location: ' . $redirectToHome);
+        header('location: record-controller/home-controller.php');
     }
 
     if (isset($_POST['signin'])) {
@@ -16,7 +16,7 @@
 
         if ($result) {
             $_SESSION['username'] = $username;
-            header('location: ' . $redirectToHome);
+            header('location: record-controller/home-controller.php');
             exit();
         } else {
             $error = 'username or password wrong';

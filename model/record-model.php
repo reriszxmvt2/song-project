@@ -9,7 +9,7 @@
                         record.id,
                         record.name_record,
                         COUNT(DISTINCT band.id) AS total_band,
-                        COUNT(DISTINCT album.id) AS total_album
+                        COUNT(album.id) AS total_album
                     FROM record
                         LEFT JOIN band ON record.id = band.id_record
                         LEFT JOIN album ON band.id = album.id_band
