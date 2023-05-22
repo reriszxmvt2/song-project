@@ -1,5 +1,5 @@
 <?php
-    define('RECORDCONTROLLER','../record-controller/home-controller.php');
+    define('RECORD_CONTROLLER','../record-controller/home-controller.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,19 +10,19 @@
         <h1>Add Record</h1>
         <div>
             <p>
-                <?php echo $error; ?>
+                <?= $error ?>
             </p>
         </div>
         <div>
             <form method="post">
                 <div>
-                    <label> name_record : </label>
-                    <input type="text" name="nameRecordAdd" value="<?php echo $nameRecordAdd ?>" required>
+                    <label> Record_Name : </label>
+                    <input type="text" name="nameRecordAdd" value="<?= $nameRecordAdd ?>" required>
                 </div>
                 <button type="submit" value="userAddRecord" name="userAddRecord">add record</button>
             </form>
-            <?php $cancelUrl = RECORDCONTROLLER  ?>
-            <a href=<?php echo $cancelUrl ?> >cancel</a> 
+            <?php $cancelUrl = RECORD_CONTROLLER ?>
+            <a href=<?= $cancelUrl ?> >cancel</a> 
         </div>
     </body>
 </html>

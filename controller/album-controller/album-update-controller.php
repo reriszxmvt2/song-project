@@ -9,7 +9,7 @@
 
     $albumModel = new AlbumModel();
     $result = $albumModel->getById($albumId);
-    $nameAlbum = $result['name_album'];
+    $nameAlbum = $result['album_name'];
 
     if (isset($_POST['updateNameAlbum'])) {
         $nameAlbum = $_POST['nameAlbum'];

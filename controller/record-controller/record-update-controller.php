@@ -7,7 +7,7 @@
 
     $recordModel = new RecordModel();
     $result = $recordModel->getNameById($updateRecordId);
-    $updateRecordName = $result['name_record'];
+    $updateRecordName = $result['record_name'];
 
     if (isset($_POST['userUpdateRecord'])) {
         $updateRecordName = $_POST['userUpdateRecordName'];

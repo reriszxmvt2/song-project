@@ -1,11 +1,7 @@
 <?php
-    define('ALBUMCONTROLLER','../album-controller/');
-    define('ALBUMPATH',[
-        'controller' => 'album-controller.php',
-        'add' => 'album-add-controller.php',
-        'update' => 'album-update-controller.php',
-    ]);
-
+    define('ALBUM_CONTROLLER','../album-controller/album-controller.php');
+    define('ADD_ALBUM_PATH','../album-controller/album-add-controller.php');
+    define('UPDATE_ALBUM_PATH','../album-controller/album-update-controller.php');
     define('BANDCONTROLLER','../band-controller/band-controller.php');
 ?>
 <!DOCTYPE html>
@@ -19,7 +15,7 @@
         </h1>
         <div>
             <?php $backUrl = BANDCONTROLLER . '?recordId=' . $recordId; ?>
-            <a href="<?php echo $backUrl; ?>"> <= back</a>
+            <a href="<?= $backUrl ?>"> <= back</a>
         </div>
         <br />
         <form method="post">
@@ -38,19 +34,19 @@
                         <?php 
                             foreach ($results as $row) {
                                 $albumId = $row['id'];
-                                $deleteUrl = ALBUMCONTROLLER . ALBUMPATH['controller'] . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
-                                $updateUrl = ALBUMCONTROLLER . ALBUMPATH['update'] . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                                $deleteUrl = ALBUM_CONTROLLER . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
+                                $updateUrl = UPDATE_ALBUM_PATH . '?bandId=' . $bandId . '&recordId=' . $recordId . '&albumId=' . $albumId;
                         ?> 
                             <tr>
                                 <td>
-                                    <p style="text-align: center;"><?php echo $row['name_album']; ?></p>
+                                    <p style="text-align: center;"><?= $row['album_name'] ?></p>
                                 </td>
                                 <td>
-                                    <a href="<?php echo $deleteUrl; ?>">delete</a>
+                                    <a href="<?= $deleteUrl ?>">delete</a>
                                     &nbsp;
                                 </td>
                                 <td>
-                                    <a href="<?php echo $updateUrl; ?>">update</a>
+                                    <a href="<?= $updateUrl ?>">update</a>
                                     &nbsp;
                                 </td>
                             </tr>
@@ -60,8 +56,8 @@
             <?php endif; ?>
         </div>
         <div>
-            <?php $addUrl = ALBUMCONTROLLER . ALBUMPATH['add'] . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
-            <a href="<?php echo $addUrl; ?>">add album</a>
+            <?php $addUrl = ADD_ALBUM_PATH . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+            <a href="<?= $addUrl ?>">add album</a>
         </div>
     </body>
 </html>

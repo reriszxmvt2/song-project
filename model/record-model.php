@@ -3,17 +3,17 @@
 
     class RecordModel extends BaseModel
     {
-        public function getList() //todo: review database.
+        public function getList()
         {
             $sql = 'SELECT 
-                        record.id,
-                        record.name_record,
-                        COUNT(DISTINCT band.id) AS total_band,
-                        COUNT(DISTINCT album.id) AS total_album
-                    FROM record
-                        LEFT JOIN band ON record.id = band.id_record
-                        LEFT JOIN album ON record.id = album.id_record
-                    GROUP BY record.id
+                        r.id,
+                        r.record_name,
+                        COUNT(DISTINCT b.id) AS total_band,
+                        COUNT(DISTINCT a.id) AS total_album
+                    FROM record r
+                        LEFT JOIN band b ON r.id = b.record_id
+                        LEFT JOIN album a ON r.id = a.record_id
+                    GROUP BY r.id
             ';
             $results = $this->connect->query($sql)->fetchAll();
 
@@ -24,7 +24,7 @@
         {
             $sql = 'SELECT *
                     FROM record
-                    WHERE name_record = :recordName
+                    WHERE record_name = :recordName
             ';
             $paramValues = [
                 ':recordName' => $recordName,
@@ -39,7 +39,7 @@
 
         public function add($recordName)
         {
-            $sql = 'INSERT INTO record (name_record)
+            $sql = 'INSERT INTO record (record_name)
                     VALUES (:recordName)
             ';
             $paramValues = [
@@ -67,7 +67,7 @@
         public function update($newName, $recordId)
         {
             $sql = 'UPDATE record 
-                    SET name_record = :newName 
+                    SET record_name = :newName 
                     WHERE id = :recordId
             ';
             $paramValues = [
@@ -81,7 +81,7 @@
 
         public function getNameById($recordId)
         {
-            $sql = 'SELECT name_record
+            $sql = 'SELECT record_name
                     FROM record
                     WHERE id = :recordId
             ';

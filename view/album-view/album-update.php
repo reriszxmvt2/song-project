@@ -1,5 +1,5 @@
 <?php
-    define('ALBUMCONTROLLER','../album-controller/album-controller.php');
+    define('ALBUM_CONTROLLER','../album-controller/album-controller.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
             <button type="submit" value="updateNameAlbum" name="updateNameAlbum">update Album</button>
         </form>
         <div>
-            <?php $cancelUrl = ALBUMCONTROLLER . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+            <?php $cancelUrl = ALBUM_CONTROLLER . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
             <a href=<?php echo $cancelUrl ?> >cancel</a>  
         </div>
     </body>

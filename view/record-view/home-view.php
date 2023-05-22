@@ -1,12 +1,8 @@
-<?php 
-    define('RECORDCONTROLLER','../record-controller/');
-    define('RECORDPATH',[
-        'controller' => 'home-controller.php',
-        'add' => 'record-add-controller.php',
-        'update' => 'record-update-controller.php',
-    ]);
-
-    define('BANDCONTROLLER','../band-controller/band-controller.php');
+<?php
+    define('RECORD_CONTROLLER', '../record-controller/home-controller.php');
+    define('APP_RECORD_PATH','../record-controller/record-add-controller.php');
+    define('UPDATE_RECORD_PATH','../record-controller/record-update-controller.php');
+    define('BAND_CONTROLLER', '../band-controller/band-controller.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +12,7 @@
     <body>
         <h1>Home Page</h1>
         <div>
-            <p>Hello!! : <?php echo $_SESSION['username']; ?></p>
+            <p>Hello!! : <?= $_SESSION['username'] ?></p>
         </div>
         <form method="post">
             <button name="logout" value="logout" type="submit">Sign out</button>
@@ -40,30 +36,30 @@
                     <?php
                         foreach ($results as $row) {  
                             $recordId = $row['id'];
-                            $deleteUrl = RECORDCONTROLLER . RECORDPATH['controller'] . '?deleteRecordId=' . $recordId;
-                            $updateUrl = RECORDCONTROLLER . RECORDPATH['update'] . '?updateRecordId=' . $recordId;
-                            $bandUrl = BANDCONTROLLER . '?recordId=' . $recordId;
+                            $deleteUrl = RECORD_CONTROLLER . '?deleteRecordId=' . $recordId;
+                            $updateUrl = UPDATE_RECORD_PATH . '?updateRecordId=' . $recordId;
+                            $bandUrl = BAND_CONTROLLER . '?recordId=' . $recordId;
                     ?> 
                         <tr>
                             <td> <!--review short tag -->
-                                <p style="text-align: center;"><?php echo $row['name_record']; ?></p>
+                                <p style="text-align: center;"><?= $row['record_name'] ?></p>
                             </td>
                             <td>
-                                <p style="text-align: center;"><?php echo $row['total_band']; ?></p>
+                                <p style="text-align: center;"><?= $row['total_band'] ?></p>
                             </td>
                             <td>
-                                <p style="text-align: center;"><?php echo $row['total_album']; ?></p>
+                                <p style="text-align: center;"><?= $row['total_album'] ?></p>
                             </td>
                             <td>
-                                <a href="<?php echo $deleteUrl; ?>">delete</a>
+                                <a href="<?= $deleteUrl ?>">delete</a>
                                 &nbsp;
                             </td>
                             <td>
-                                <a href="<?php echo $updateUrl; ?>">update</a>
+                                <a href="<?= $updateUrl ?>">update</a>
                                 &nbsp;
                             </td>
                             <td>
-                                <a href="<?php echo $bandUrl; ?>">band_list</a>
+                                <a href="<?= $bandUrl ?>">band_list</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -73,9 +69,9 @@
         <br>
         <div>
             <?php
-                $addUrl = RECORDCONTROLLER . RECORDPATH['add'];
+                $addUrl = APP_RECORD_PATH;
             ?>
-            <a href="<?php echo $addUrl; ?>">add record</a>
+            <a href="<?= $addUrl ?>">add record</a>
         </div>
     </body>
 </html>

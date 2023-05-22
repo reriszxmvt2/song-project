@@ -1,5 +1,5 @@
 <?php
-    define('ALBUMCONTROLLER','../album-controller/album-controller.php');
+    define('ALBUM_CONTROLLER','../album-controller/album-controller.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@
             </div>
             <br />
             <div>
-                <?php $cancelUrl = ALBUMCONTROLLER . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
+                <?php $cancelUrl = ALBUM_CONTROLLER . '?recordId=' . $recordId . '&bandId=' . $bandId; ?>
                 <a href=<?php echo $cancelUrl ?> >cancel</a> 
             </div>
         </div>

@@ -1,5 +1,5 @@
 <?php
-    define('BANDCONTROLLER','../band-controller/band-controller.php');
+    define('BAND_CONTROLLER','../band-controller/band-controller.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,16 +10,16 @@
         <h1>Update Band</h1>
         <div>
             <p>
-                <?php echo $error; ?>
+                <?= $error ?>
             </p>
         </div>
         <form method="post">
-            <input type="text" name="nameBand" value="<?php echo $nameBand ?>" required>
+            <input type="text" name="nameBand" value="<?= $nameBand ?>" required>
             <button type="submit" value="updateNameBand" name="updateNameBand">update band</button>
         </form>
         <div>
-            <?php $cancelUrl = BANDCONTROLLER . '?recordId=' . $recordId; ?>
-            <a href=<?php echo $cancelUrl ?> >cancel</a> 
+            <?php $cancelUrl = BAND_CONTROLLER . '?recordId=' . $recordId; ?>
+            <a href=<?= $cancelUrl ?> >cancel</a> 
         </div>
     </body>
 </html>

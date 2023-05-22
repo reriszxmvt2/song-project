@@ -6,7 +6,7 @@
         public function update($newName, $bandId)
         {
             $sql = 'UPDATE band 
-                    SET name_band = :newName 
+                    SET band_name = :newName 
                     WHERE id = :bandId
             ';
             $paramValues = [
@@ -22,7 +22,7 @@
         {
             $sql = 'SELECT *
                     FROM band
-                    WHERE name_band = :bandName
+                    WHERE band_name = :bandName
             ';
             $paramValues = [
                 ':bandName' => $bandName,
@@ -38,7 +38,7 @@
         public function getById($bandId)
         {
             $sql = 'SELECT 
-                        name_band
+                        band_name
                     FROM band
                     WHERE id = :bandId
             ';
@@ -69,8 +69,8 @@
 
         public function add($bandName, $recordId)
         {
-            $sql = 'INSERT INTO band (name_band,id_record)
-                    VALUES (:bandName,:recordId)
+            $sql = 'INSERT INTO band (band_name, record_id)
+                    VALUES (:bandName, :recordId)
             ';
             $paramValues = [
                 ':bandName' => $bandName,
@@ -85,8 +85,8 @@
         {
             $sql = 'SELECT *
                     FROM band
-                    WHERE name_band = :bandName
-                        AND id_record = :recordId
+                    WHERE band_name = :bandName
+                        AND record_id = :recordId
             ';
             $paramValues = [
                 ':bandName' => $bandName,
@@ -103,13 +103,13 @@
         public function getList($recordId)
         {
             $sql = 'SELECT 
-                        band.id,
-                        band.name_band,
-                        COUNT(album.id_band) as total_album
-                    FROM band
-                        LEFT JOIN album ON band.id = album.id_band
-                    WHERE band.id_record = :recordId
-                    GROUP BY band.id;
+                        b.id,
+                        b.band_name,
+                        COUNT(a.band_id) as total_album
+                    FROM band b
+                        LEFT JOIN album a ON b.id = a.band_id
+                    WHERE b.record_id = :recordId
+                    GROUP BY b.id;
             ';
             $paramValues = [
                 ':recordId' => $recordId,
@@ -126,7 +126,7 @@
         {
             $sql = 'DELETE 
                     FROM band 
-                    WHERE id_record = :recordId
+                    WHERE record_id = :recordId
             ';
             $paramValues = [
                 ':recordId' => $recordId,

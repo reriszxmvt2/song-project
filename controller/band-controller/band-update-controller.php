@@ -8,7 +8,7 @@
 
     $bandModel = new BandModel();
     $result = $bandModel->getById($bandId);
-    $nameBand = $result['name_band'];
+    $nameBand = $result['band_name'];
 
     if (isset($_POST['updateNameBand'])) {
         $nameBand = $_POST['nameBand'];

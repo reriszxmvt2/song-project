@@ -6,7 +6,7 @@
         public function update($newName, $albumId)
         {
             $sql = 'UPDATE album 
-                    SET name_album = :newName 
+                    SET album_name = :newName 
                     WHERE id = :albumId
             ';
             $paramValues = [
@@ -21,7 +21,7 @@
         public function getById($albumId)
         {
             $sql = 'SELECT 
-                        name_album
+                        album_name
                     FROM album
                     WHERE id = :albumId
                     ';
@@ -49,7 +49,7 @@
         }
         public function add($albumName, $bandId, $recordId)
         {
-            $sql = 'INSERT INTO album (name_album,id_band,id_record)
+            $sql = 'INSERT INTO album (album_name,band_id,record_id)
                     VALUES (:albumName, :bandId, :recordId)';
             $paramValues = [
                 ':albumName' => $albumName,
@@ -65,8 +65,8 @@
         {
             $sql = 'SELECT *
                     FROM album
-                    WHERE id_band = :bandId
-                        AND name_album = :albumName
+                    WHERE band_id = :bandId
+                        AND album_name = :albumName
                     ';
             $paramValues = [
                 'bandId' => $bandId,
@@ -84,7 +84,7 @@
         {
             $sql = 'SELECT *
                     FROM album
-                    WHERE id_band = :bandId
+                    WHERE band_id = :bandId
                     ';
             $paramValues = [
                 'bandId' => $bandId,
@@ -101,7 +101,7 @@
         {
             $sql = 'DELETE
                     FROM album
-                    WHERE id_band = :bandId
+                    WHERE band_id = :bandId
             ';
             $paramValues = [
                 ':bandId' => $bandId,
@@ -115,7 +115,7 @@
         {
             $sql = 'DELETE 
                     FROM album
-                    WHERE id_record = :deleteRecordId
+                    WHERE record_id = :deleteRecordId
             ';
             $paramValues = [
                 ':deleteRecordId' => $deleteRecordId,
